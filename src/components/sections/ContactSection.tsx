@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Terminal, Mail, MapPin, Shield, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, CheckCircle, ArrowRight, Clock, MessageSquare } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    topic: 'neural-architecture',
+    topic: 'full-time',
     message: ''
   });
 
@@ -17,11 +17,10 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate transmission delay
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 1200);
+    }, 1000);
   };
 
   return (
@@ -30,13 +29,13 @@ export const ContactSection: React.FC = () => {
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none" />
 
       <SectionHeader
-        badge="SECURE CHANNEL"
-        title="TRANSMIT PACKET // CONTACT FORM"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Direct encrypted transmission channel for research collaborations and high-throughput engineering."
+        badge="LET'S CONNECT"
+        title="Get in Touch"
+        subtitle="Interested in discussing a staff engineering opportunity, architectural advisory, or a creative WebGL project? Drop me a line below."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {/* Left Column: Direct System Telemetry & Contact Info */}
+        {/* Left Column: Direct Contact Info & Availability */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -46,22 +45,25 @@ export const ContactSection: React.FC = () => {
         >
           <div className="rounded-2xl bg-slate-950/80 backdrop-blur-2xl border border-white/10 p-8 shadow-xl">
             <h3 className="text-xl font-bold text-white tracking-tight flex items-center space-x-3 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span>TERMINAL TELEMETRY</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Contact Information</span>
             </h3>
 
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-                    DIRECT DISPATCH
+                  <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                    DIRECT EMAIL
                   </div>
-                  <div className="text-sm font-mono text-slate-200 mt-0.5">
-                    alexander.vance@neuralnexus.io
-                  </div>
+                  <a
+                    href="mailto:alexander.vance@example.com"
+                    className="text-sm font-medium text-slate-200 hover:text-cyan-400 transition-colors mt-0.5 block"
+                  >
+                    alexander.vance@example.com
+                  </a>
                 </div>
               </div>
 
@@ -70,47 +72,38 @@ export const ContactSection: React.FC = () => {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-                    PHYSICAL COORDINATES
+                  <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                    LOCATION
                   </div>
-                  <div className="text-sm font-mono text-slate-200 mt-0.5">
-                    San Francisco, CA // Global Remote
+                  <div className="text-sm text-slate-200 mt-0.5">
+                    San Francisco, California (Available for Remote)
                   </div>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                  <Shield className="w-5 h-5" />
+                  <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-                    ENCRYPTION STANDARD
+                  <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                    RESPONSE TIME
                   </div>
-                  <div className="text-sm font-mono text-slate-200 mt-0.5">
-                    RSA-4096 / TLS 1.3 QUANTUM-RESISTANT
+                  <div className="text-sm text-slate-200 mt-0.5">
+                    Typically responds within 24 hours
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Simulated Live System Status Box */}
-            <div className="mt-8 p-4 rounded-xl bg-black/60 border border-white/5 font-mono text-xs space-y-2">
-              <div className="flex items-center justify-between text-slate-400 border-b border-white/5 pb-2">
-                <span className="flex items-center gap-1.5 text-cyan-400">
-                  <Terminal className="w-3.5 h-3.5" />
-                  STATUS_CHECK
-                </span>
-                <span className="text-emerald-400">ONLINE</span>
-              </div>
-              <div className="text-slate-400 text-[11px] leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Average response cycle is within 24 operational hours.
-              </div>
+            {/* Note Box */}
+            <div className="mt-8 p-4 rounded-xl bg-white/[0.02] border border-white/5 font-sans text-xs text-slate-400 leading-relaxed">
+              Open to senior and staff engineering roles, generative AI advisory positions, and selective freelance creative technology consulting.
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column: Minimalist Grid-Aligned Contact Form */}
+        {/* Right Column: Minimalist Contact Form */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -129,16 +122,16 @@ export const ContactSection: React.FC = () => {
                   <CheckCircle className="w-8 h-8" />
                 </div>
                 <h4 className="text-2xl font-bold text-white tracking-tight">
-                  PACKET TRANSMITTED SUCCESSFULLY
+                  Message Sent Successfully!
                 </h4>
                 <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Your message has been routed to the primary intake node.
+                  Thank you for reaching out. I have received your message and will review it promptly.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
                   className="mt-6 px-6 py-2.5 rounded-xl font-mono text-xs font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 transition-colors"
                 >
-                  TRANSMIT ANOTHER PACKET
+                  Send Another Message
                 </button>
               </motion.div>
             ) : (
@@ -147,12 +140,12 @@ export const ContactSection: React.FC = () => {
                   {/* Name field */}
                   <div className="space-y-2">
                     <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
-                      IDENTIFIER / NAME *
+                      Your Name *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Lorem Ipsum"
+                      placeholder="Jane Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm text-white placeholder-slate-600 transition-colors"
@@ -162,12 +155,12 @@ export const ContactSection: React.FC = () => {
                   {/* Email field */}
                   <div className="space-y-2">
                     <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
-                      RETURN ADDRESS / EMAIL *
+                      Your Email *
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="node@network.org"
+                      placeholder="jane@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm text-white placeholder-slate-600 transition-colors"
@@ -175,32 +168,32 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Subject / Category */}
+                {/* Inquiry Type */}
                 <div className="space-y-2">
                   <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
-                    TRANSMISSION TOPIC
+                    Inquiry Topic
                   </label>
                   <select
                     value={formData.topic}
                     onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm text-white transition-colors"
                   >
-                    <option value="neural-architecture">Neural Architecture & ML Systems</option>
-                    <option value="distributed-computing">High-Throughput Distributed Nodes</option>
-                    <option value="advisory-consulting">Advisory & Technical Strategy</option>
-                    <option value="other-inquiry">General Technical Transmission</option>
+                    <option value="full-time">Senior / Staff Engineering Opportunity</option>
+                    <option value="advisory">Technical Advisory & AI Architecture</option>
+                    <option value="consulting">Creative WebGL / Frontend Consulting</option>
+                    <option value="general">General Inquiry or Coffee Chat</option>
                   </select>
                 </div>
 
                 {/* Message field */}
                 <div className="space-y-2">
                   <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
-                    PAYLOAD / MESSAGE *
+                    Your Message *
                   </label>
                   <textarea
                     required
                     rows={5}
-                    placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                    placeholder="Hello Alexander, I came across your portfolio and wanted to reach out regarding..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm text-white placeholder-slate-600 transition-colors resize-none"
@@ -216,12 +209,12 @@ export const ContactSection: React.FC = () => {
                   {isSubmitting ? (
                     <span className="flex items-center space-x-2">
                       <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                      <span>ENCRYPTING & DISPATCHING...</span>
+                      <span>Sending Message...</span>
                     </span>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
-                      <span>TRANSMIT PACKET</span>
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Send Message</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Menu, X, Cpu } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -15,12 +15,12 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'OVERVIEW', href: '#hero' },
-    { name: 'MATRIX', href: '#skills' },
-    { name: 'PROJECTS', href: '#projects' },
-    { name: 'TIMELINE', href: '#timeline' },
-    { name: 'ACCOLADES', href: '#achievements' },
-    { name: 'TRANSMIT', href: '#contact' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Timeline', href: '#timeline' },
+    { name: 'Awards', href: '#achievements' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -37,17 +37,17 @@ export const Navbar: React.FC = () => {
               : 'bg-transparent border border-transparent'
           }`}
         >
-          {/* Brand identity */}
+          {/* Brand Identity */}
           <a href="#hero" className="flex items-center space-x-3 group">
-            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(0,242,254,0.4)] transition-all duration-300">
-              <Cpu className="w-4 h-4 text-cyan-400" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-slate-950 font-black font-mono text-sm shadow-[0_0_15px_rgba(0,242,254,0.35)] group-hover:scale-105 transition-transform duration-300">
+              AV
             </div>
             <div className="flex flex-col">
-              <span className="font-mono text-sm font-bold tracking-widest text-white group-hover:text-cyan-300 transition-colors">
-                AV.NEXUS
+              <span className="font-sans text-sm font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+                Alexander Vance
               </span>
-              <span className="text-[9px] font-mono tracking-wider text-slate-400">
-                AI & DISTRIBUTED CORE
+              <span className="text-[10px] font-mono tracking-wider text-slate-400">
+                AI & Systems Engineer
               </span>
             </div>
           </a>
@@ -69,19 +69,19 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-              <span>ONLINE</span>
+              <span>Available for Roles</span>
             </div>
 
             <a
               href="#contact"
               className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-xl text-xs font-mono font-semibold text-black bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_25px_rgba(0,242,254,0.5)] transition-all duration-300"
             >
-              <Terminal className="w-3.5 h-3.5" />
-              <span>CONNECT</span>
+              <Mail className="w-3.5 h-3.5" />
+              <span>Get in Touch</span>
             </a>
           </div>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile Menu Toggle */}
           <div className="flex md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile navigation drawer */}
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -117,14 +117,14 @@ export const Navbar: React.FC = () => {
               <div className="pt-3 border-t border-white/10 flex justify-between items-center">
                 <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  <span>ONLINE // ACTIVE</span>
+                  <span>Available</span>
                 </div>
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="px-4 py-1.5 rounded-lg text-xs font-mono font-semibold text-black bg-cyan-400 hover:bg-cyan-300"
                 >
-                  CONNECT
+                  Get in Touch
                 </a>
               </div>
             </div>

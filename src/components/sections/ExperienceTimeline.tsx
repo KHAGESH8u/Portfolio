@@ -18,9 +18,9 @@ export const ExperienceTimeline: React.FC = () => {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <SectionHeader
-        badge="CHRONOLOGICAL TRAJECTORY"
-        title="EXPERIENCE & EDUCATION // TIMELINE"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dynamic trajectory tracking industry leadership and high-tier academic research."
+        badge="CAREER & ACADEMIA"
+        title="Experience & Education"
+        subtitle="A chronological journey through my professional engineering roles, leadership milestones, and computer science degrees."
       />
 
       {/* Filter switches */}
@@ -34,7 +34,7 @@ export const ExperienceTimeline: React.FC = () => {
                 : 'text-slate-400 hover:text-white'
             }`}
           >
-            ALL VECTORS
+            ALL MILESTONES
           </button>
           <button
             onClick={() => setFilter('experience')}

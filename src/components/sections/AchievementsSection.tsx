@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Trophy, Medal, Star, Sparkles } from 'lucide-react';
+import { Award, Trophy, Medal, Star, Sparkles, CheckCircle2 } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ACHIEVEMENTS_DATA } from '../../data/portfolioData';
 
@@ -14,8 +14,8 @@ export const AchievementsSection: React.FC = () => {
 
       <SectionHeader
         badge="HONORS & RECOGNITION"
-        title="HOLOGRAPHIC VAULT // ACCOLADES"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Recognized milestones in autonomous systems, distributed scalability, and algorithmic breakthrough."
+        title="Awards & Accolades"
+        subtitle="Key recognitions, open source grants, and engineering hackathon honors received throughout my career."
       />
 
       {/* Holographic style cards grid */}
@@ -50,7 +50,7 @@ export const AchievementsSection: React.FC = () => {
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-300 group-hover:scale-110 group-hover:border-cyan-300 transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">
+                    <span className="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">
                       {item.year}
                     </span>
                   </div>
@@ -77,10 +77,13 @@ export const AchievementsSection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Bottom holographic indicator */}
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
-                  <span>SIG_HASH: VALID</span>
-                  <span className="text-cyan-400">ENCRYPTED</span>
+                {/* Bottom verified indicator */}
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <span className="flex items-center gap-1 text-slate-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                    Verified Distinction
+                  </span>
+                  <span className="text-cyan-400">Official</span>
                 </div>
               </div>
             </motion.div>
