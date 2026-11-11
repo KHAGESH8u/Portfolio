@@ -180,8 +180,8 @@ export const MonolithHeroCanvas: React.FC = () => {
           <GoldenStardust />
         </Suspense>
       </Canvas>
-      {/* Bottom fade blending into deep aubergine void */}
-      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#07020d] via-[#07020d]/70 to-transparent pointer-events-none" />
+      {/* Subtle bottom transition allowing the global starfield to flow continuously */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-transparent via-transparent to-transparent pointer-events-none" />
     </div>
   );
 };

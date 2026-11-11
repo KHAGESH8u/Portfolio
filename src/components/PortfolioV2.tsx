@@ -1,4 +1,5 @@
 import React from 'react';
+import { GlobalStardustCanvas } from './v2/GlobalStardustCanvas';
 import { NavbarV2 } from './v2/NavbarV2';
 import { HeroSectionV2 } from './v2/HeroSectionV2';
 import { AboutSectionV2 } from './v2/AboutSectionV2';
@@ -12,15 +13,18 @@ import { FooterV2 } from './v2/FooterV2';
 export const PortfolioV2: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[#07020d] text-slate-100 selection:bg-[#d4af37] selection:text-black overflow-x-hidden font-sans">
-      {/* Subtle royal background grid texture */}
-      <div className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0" />
+      {/* Global Starfield 3D Canvas flowing behind the entire page */}
+      <GlobalStardustCanvas />
+
+      {/* Subtle royal background grid texture overlay */}
+      <div className="fixed inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
 
       {/* Floating Haute-Couture Navigation */}
       <NavbarV2 />
 
       {/* Main Editorial Flow */}
       <main className="relative z-10 flex flex-col">
-        {/* 1. Hero with Gold Monoliths & Editorial Typography */}
+        {/* 1. Hero with Gold Monoliths & Swapped Layout (Headshot LEFT, Name/Role RIGHT) */}
         <HeroSectionV2 />
 
         {/* 2. Chapter I: Prologue & Artistry */}
