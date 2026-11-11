@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { BootSequenceV2 } from './v2/BootSequenceV2';
 import { GlobalStardustCanvas } from './v2/GlobalStardustCanvas';
 import { NavbarV2 } from './v2/NavbarV2';
 import { HeroSectionV2 } from './v2/HeroSectionV2';
@@ -11,8 +13,15 @@ import { ContactSectionV2 } from './v2/ContactSectionV2';
 import { FooterV2 } from './v2/FooterV2';
 
 export const PortfolioV2: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="relative min-h-screen bg-[#07020d] text-slate-100 selection:bg-[#d4af37] selection:text-black overflow-x-hidden font-sans">
+      {/* Version 2 Custom Regal Boot Sequence Loader */}
+      <AnimatePresence mode="wait">
+        {isLoading && <BootSequenceV2 onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       {/* Global Starfield 3D Canvas flowing behind the entire page */}
       <GlobalStardustCanvas />
 

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { BootSequenceV4 } from './v4/BootSequenceV4';
 import { GlobalNeuralTealCanvas } from './v4/GlobalNeuralTealCanvas';
 import { NavbarV4 } from './v4/NavbarV4';
 import { HeroSectionV4 } from './v4/HeroSectionV4';
@@ -11,8 +13,15 @@ import { ContactSectionV4 } from './v4/ContactSectionV4';
 import { FooterV4 } from './v4/FooterV4';
 
 export const PortfolioV4: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="relative h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth isolate bg-[#011414] text-teal-50 selection:bg-teal-300 selection:text-black font-sans overflow-x-hidden">
+      {/* Version 4 Custom Neural Synaptic Boot Sequence Loader */}
+      <AnimatePresence mode="wait">
+        {isLoading && <BootSequenceV4 onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       {/* 1. Global Viewport-Fixed Glowing Neural Network & Synaptic Canvas */}
       <GlobalNeuralTealCanvas />
 
