@@ -1,45 +1,49 @@
 import React from 'react';
-import { GlobalTealPorcelainCanvas } from './v4/GlobalTealPorcelainCanvas';
+import { GlobalNeuralTealCanvas } from './v4/GlobalNeuralTealCanvas';
 import { NavbarV4 } from './v4/NavbarV4';
-import { HeroV4 } from './v4/HeroV4';
-import { AboutV4 } from './v4/AboutV4';
-import { ProjectsV4 } from './v4/ProjectsV4';
-import { SkillsV4 } from './v4/SkillsV4';
-import { TimelineV4 } from './v4/TimelineV4';
-import { ContactV4 } from './v4/ContactV4';
+import { HeroSectionV4 } from './v4/HeroSectionV4';
+import { AboutSectionV4 } from './v4/AboutSectionV4';
+import { SkillsSectionV4 } from './v4/SkillsSectionV4';
+import { ProjectsSectionV4 } from './v4/ProjectsSectionV4';
+import { TimelineSectionV4 } from './v4/TimelineSectionV4';
+import { AccoladesSectionV4 } from './v4/AccoladesSectionV4';
+import { ContactSectionV4 } from './v4/ContactSectionV4';
 import { FooterV4 } from './v4/FooterV4';
 
 export const PortfolioV4: React.FC = () => {
   return (
     <div className="relative h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth isolate bg-[#011414] text-teal-50 selection:bg-teal-300 selection:text-black font-sans overflow-x-hidden">
-      {/* 1. Viewport-Fixed Liquid Topographic Waves & Porcelain Monolith 3D Canvas */}
-      <GlobalTealPorcelainCanvas />
+      {/* 1. Global Viewport-Fixed Glowing Neural Network & Synaptic Canvas */}
+      <GlobalNeuralTealCanvas />
 
-      {/* Ambient background teal grid pattern overlay */}
+      {/* Subtle royal background grid texture overlay */}
       <div className="fixed inset-0 bg-grid-pattern opacity-15 pointer-events-none z-0" />
 
-      {/* Floating Modern Header Navigation */}
+      {/* Floating Haute-Couture Navigation */}
       <NavbarV4 />
 
-      {/* Main Cinematic Scroll Architecture with strict pointer-events pass-through */}
+      {/* Main Editorial Flow with Scroll Snapping & Strict Pointer Events Pass-Through */}
       <main className="relative z-10 flex flex-col pointer-events-none">
-        {/* 1. Hero Section (100vh): Centered Name "Khagesh" & Title */}
-        <HeroV4 />
+        {/* 1. Hero with Headshot on LEFT & Personal Typography on RIGHT */}
+        <HeroSectionV4 />
 
-        {/* 2. About & Biometrics: Clean, Centered, Wide-Measure Typography Floating Over Void */}
-        <AboutV4 />
+        {/* 2. Chapter I: Prologue & Artistry */}
+        <AboutSectionV4 />
 
-        {/* 3. Projects Showcase: Massive, Cinematic, Alternating Full-Width Sections */}
-        <ProjectsV4 />
+        {/* 3. Chapter II: Technical Discipline & Capabilities */}
+        <SkillsSectionV4 />
 
-        {/* 4. Skills & Capabilities: Organic Floating Tag Cloud */}
-        <SkillsV4 />
+        {/* 4. Chapter III: Archive Exhibition (Projects) */}
+        <ProjectsSectionV4 />
 
-        {/* 5. Career Trajectory: Minimalist Floating Stream */}
-        <TimelineV4 />
+        {/* 5. Chapter IV: Trajectory & Pedigree (Timeline) */}
+        <TimelineSectionV4 />
 
-        {/* 6. Cinematic Conclusion & Transmission */}
-        <ContactV4 />
+        {/* 6. Chapter V: Distinctions & Accolades */}
+        <AccoladesSectionV4 />
+
+        {/* 7. Chapter VI: Initiate Consultation (Contact) */}
+        <ContactSectionV4 />
 
         {/* Footer */}
         <FooterV4 />
