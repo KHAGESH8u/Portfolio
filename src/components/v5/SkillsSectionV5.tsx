@@ -13,7 +13,7 @@ export const SkillsSectionV5: React.FC = () => {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-20 pointer-events-none">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
           <span>CHAPTER II</span>
           <span>//</span>
           <span>TECHNICAL DISCIPLINE</span>
@@ -39,7 +39,7 @@ export const SkillsSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20 }}
           className="col-span-12 lg:col-span-7 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300 shadow-2xl">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#d4af37]/15">
                 <div>
@@ -64,7 +64,7 @@ export const SkillsSectionV5: React.FC = () => {
               {languages.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="px-3.5 py-1.5 rounded-full bg-[#150826] border border-[#d4af37]/25 text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-[#25103f] transition-all"
+                  className="px-3.5 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-black/60 transition-all"
                 >
                   {skill.name}
                 </span>
@@ -81,7 +81,7 @@ export const SkillsSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.1 }}
           className="col-span-12 lg:col-span-5 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300 shadow-2xl">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#d4af37]/15">
                 <div>
@@ -106,7 +106,7 @@ export const SkillsSectionV5: React.FC = () => {
               {frontend.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="px-3.5 py-1.5 rounded-full bg-[#150826] border border-[#d4af37]/25 text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-[#25103f] transition-all"
+                  className="px-3.5 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-black/60 transition-all"
                 >
                   {skill.name}
                 </span>
@@ -123,7 +123,7 @@ export const SkillsSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.2 }}
           className="col-span-12 lg:col-span-5 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300 shadow-2xl">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#d4af37]/15">
                 <div>
@@ -148,7 +148,7 @@ export const SkillsSectionV5: React.FC = () => {
               {ai.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="px-3.5 py-1.5 rounded-full bg-[#150826] border border-[#d4af37]/25 text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-[#25103f] transition-all"
+                  className="px-3.5 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-black/60 transition-all"
                 >
                   {skill.name}
                 </span>
@@ -165,7 +165,7 @@ export const SkillsSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.3 }}
           className="col-span-12 lg:col-span-7 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 h-full flex flex-col justify-between hover:border-[#eed98d]/40 transition-all duration-300 shadow-2xl">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#d4af37]/15">
                 <div>
@@ -190,7 +190,7 @@ export const SkillsSectionV5: React.FC = () => {
               {backend.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="px-3.5 py-1.5 rounded-full bg-[#150826] border border-[#d4af37]/25 text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-[#25103f] transition-all"
+                  className="px-3.5 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md text-xs font-serif text-[#eed98d] hover:border-[#eed98d] hover:bg-black/60 transition-all"
                 >
                   {skill.name}
                 </span>

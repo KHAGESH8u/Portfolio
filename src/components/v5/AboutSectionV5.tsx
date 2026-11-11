@@ -9,11 +9,11 @@ export const AboutSectionV5: React.FC = () => {
   return (
     <section id="about-v5" className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pointer-events-none">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-10 w-96 h-96 bg-[#38165e]/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-10 w-96 h-96 bg-[#38165e]/15 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Editorial Header */}
       <div className="text-center max-w-3xl mx-auto mb-20 pointer-events-none">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
           <span>CHAPTER I</span>
           <span>//</span>
           <span>PROLOGUE</span>
@@ -38,7 +38,7 @@ export const AboutSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20 }}
           className="lg:col-span-7 flex flex-col justify-between pointer-events-auto"
         >
-          <div className="relative rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-12 shadow-[0_15px_50px_rgba(7,2,13,0.8)] h-full flex flex-col justify-between">
+          <div className="relative rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.7)] h-full flex flex-col justify-between">
             {/* Top gold line accent */}
             <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#eed98d] to-transparent pointer-events-none" />
 
@@ -71,7 +71,7 @@ export const AboutSectionV5: React.FC = () => {
               {ABOUT_DATA.focusAreas.map((area) => (
                 <span
                   key={area}
-                  className="px-3.5 py-1.5 rounded-full bg-[#150826] border border-[#d4af37]/20 text-xs font-serif text-[#eed98d] tracking-wide"
+                  className="px-3.5 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-wide"
                 >
                   {area}
                 </span>
@@ -92,9 +92,9 @@ export const AboutSectionV5: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ type: 'spring', stiffness: 90, damping: 20, delay: index * 0.08 }}
-                  className="relative rounded-2xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-6 shadow-xl flex flex-col justify-between group hover:border-[#eed98d]/50 transition-colors pointer-events-auto"
+                  className="relative rounded-2xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-6 shadow-xl flex flex-col justify-between group hover:border-[#eed98d]/50 transition-colors pointer-events-auto"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#150826] border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-black/40 border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] mb-4">
                     <IconComp className="w-5 h-5" />
                   </div>
                   <div>
@@ -116,7 +116,7 @@ export const AboutSectionV5: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.35 }}
-            className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 shadow-2xl relative overflow-hidden pointer-events-auto"
+            className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 shadow-2xl relative overflow-hidden pointer-events-auto"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#d4af37]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="text-[10px] font-mono tracking-widest text-[#d4af37] uppercase mb-2">

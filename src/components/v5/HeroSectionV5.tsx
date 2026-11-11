@@ -9,10 +9,9 @@ export const HeroSectionV5: React.FC = () => {
       id="hero-v5"
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20 pointer-events-none"
     >
-      {/* Royal aubergine & antique gold ambient illumination with lightened central spotlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-[radial-gradient(circle_at_center,rgba(126,34,206,0.28)_0%,rgba(88,28,135,0.2)_40%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/4 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/15 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#581c87]/30 rounded-full blur-[160px] pointer-events-none" />
+      {/* Royal aubergine & antique gold ambient illumination */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-[radial-gradient(circle_at_center,rgba(126,34,206,0.2)_0%,rgba(88,28,135,0.14)_40%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/10 rounded-full blur-[170px] pointer-events-none" />
 
       {/* Foreground Container: Editorial Layout with Headshot on LEFT, Typography on RIGHT */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
@@ -27,26 +26,26 @@ export const HeroSectionV5: React.FC = () => {
               className="relative w-72 sm:w-84 md:w-96 pointer-events-auto"
             >
               {/* Outer Antique Gold Ambient Halo */}
-              <div className="absolute -inset-3 rounded-[32px] bg-gradient-to-tr from-[#d4af37]/30 via-[#38165e]/40 to-[#e5c158]/30 blur-2xl opacity-70 pointer-events-none" />
+              <div className="absolute -inset-3 rounded-[32px] bg-gradient-to-tr from-[#d4af37]/25 via-[#38165e]/30 to-[#e5c158]/25 blur-2xl opacity-60 pointer-events-none" />
 
-              {/* Frame Container */}
-              <div className="relative rounded-[28px] bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/30 p-4 shadow-[0_20px_60px_rgba(7,2,13,0.9)]">
+              {/* Frame Container with Translucent Frosted Glass */}
+              <div className="relative rounded-[28px] bg-black/40 backdrop-blur-md border border-[#d4af37]/30 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
                 {/* Gold specular highlight edge */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#eed98d] to-transparent pointer-events-none" />
 
                 {/* Portrait container */}
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#d4af37]/20">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#d4af37]/25">
                   <img
                     src={HERO_DATA.avatarUrl}
                     alt={HERO_DATA.name}
-                    className="w-full h-full object-cover object-center filter sepia-[20%] contrast-[110%] hover:sepia-0 transition-all duration-700"
+                    className="w-full h-full object-cover object-center filter sepia-[15%] contrast-[110%] hover:sepia-0 transition-all duration-700"
                     loading="eager"
                   />
-                  {/* Subtle warm aubergine vignette overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e051a] via-transparent to-transparent pointer-events-none" />
+                  {/* Subtle warm vignette overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                   {/* Museum Placard Style Caption */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#07020d]/85 backdrop-blur-md border border-[#d4af37]/25 pointer-events-none">
+                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-black/40 backdrop-blur-md border border-[#d4af37]/30 pointer-events-none">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-xs font-serif font-bold text-[#eed98d] tracking-wider">
@@ -85,7 +84,7 @@ export const HeroSectionV5: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#150826]/80 border border-[#d4af37]/40 backdrop-blur-xl text-xs font-serif text-[#eed98d] tracking-widest uppercase shadow-[0_0_20px_rgba(212,175,55,0.15)] pointer-events-auto"
+              className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-black/40 border border-[#d4af37]/40 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase shadow-[0_0_20px_rgba(212,175,55,0.15)] pointer-events-auto"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#e5c158]" />
               <span>AUBERGINE & GOLD NEURAL EDITION // 2026 ARCHIVE</span>
@@ -142,7 +141,7 @@ export const HeroSectionV5: React.FC = () => {
 
               <a
                 href="#contact-v5"
-                className="px-8 py-3.5 rounded-full font-serif text-xs font-medium tracking-[0.18em] text-[#eed98d] bg-[#150826]/80 hover:bg-[#261042] border border-[#d4af37]/40 transition-all duration-300 shadow-lg flex items-center space-x-2 uppercase"
+                className="px-8 py-3.5 rounded-full font-serif text-xs font-medium tracking-[0.18em] text-[#eed98d] bg-black/40 hover:bg-black/60 border border-[#d4af37]/40 backdrop-blur-md transition-all duration-300 shadow-lg flex items-center space-x-2 uppercase"
               >
                 <Mail className="w-4 h-4 text-[#e5c158]" />
                 <span>Initiate Consultation</span>
@@ -160,7 +159,7 @@ export const HeroSectionV5: React.FC = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-[#150826] border border-transparent hover:border-[#d4af37]/30"
+                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-black/40 border border-transparent hover:border-[#d4af37]/30"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-4 h-4" />
@@ -169,14 +168,14 @@ export const HeroSectionV5: React.FC = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-[#150826] border border-transparent hover:border-[#d4af37]/30"
+                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-black/40 border border-transparent hover:border-[#d4af37]/30"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href="#about-v5"
-                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-[#150826] border border-transparent hover:border-[#d4af37]/30"
+                className="hover:text-[#eed98d] transition-colors p-2 rounded-full hover:bg-black/40 border border-transparent hover:border-[#d4af37]/30"
                 aria-label="Pedigree Overview"
               >
                 <FileText className="w-4 h-4" />

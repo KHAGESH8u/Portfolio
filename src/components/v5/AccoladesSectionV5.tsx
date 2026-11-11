@@ -9,11 +9,11 @@ export const AccoladesSectionV5: React.FC = () => {
   return (
     <section id="accolades-v5" className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pointer-events-none">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-[#38165e]/20 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-[#38165e]/15 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-20 pointer-events-none">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
           <span>CHAPTER V</span>
           <span>//</span>
           <span>DISTINCTIONS</span>
@@ -48,22 +48,22 @@ export const AccoladesSectionV5: React.FC = () => {
               className="group relative pointer-events-auto"
             >
               {/* Gold foil perimeter glow */}
-              <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-[#d4af37] via-[#eed98d] to-[#b89028] opacity-20 group-hover:opacity-60 blur-sm group-hover:blur-md transition-all duration-500 pointer-events-none" />
+              <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-[#d4af37] via-[#eed98d] to-[#b89028] opacity-20 group-hover:opacity-50 blur-sm group-hover:blur-md transition-all duration-500 pointer-events-none" />
 
-              <div className="relative rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-7 flex flex-col justify-between h-full group-hover:border-[#eed98d]/60 transition-all duration-300">
+              <div className="relative rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-7 flex flex-col justify-between h-full group-hover:border-[#eed98d]/60 transition-all duration-300 shadow-xl">
                 <div>
                   {/* Top Bar with Medallion and Year */}
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#150826] border border-[#d4af37]/40 flex items-center justify-center text-[#e5c158] group-hover:scale-105 transition-transform duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                    <div className="w-12 h-12 rounded-2xl bg-black/50 border border-[#d4af37]/40 flex items-center justify-center text-[#e5c158] group-hover:scale-105 transition-transform duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="font-serif text-xs font-bold px-3 py-1 rounded-full bg-[#150826] border border-[#d4af37]/20 text-[#eed98d]">
+                    <span className="font-serif text-xs font-bold px-3 py-1 rounded-full bg-black/40 border border-[#d4af37]/20 text-[#eed98d]">
                       {item.year}
                     </span>
                   </div>
 
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-[10px] font-serif text-[#eed98d] tracking-wider uppercase mb-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 text-[10px] font-serif text-[#eed98d] tracking-wider uppercase mb-3">
                     <Sparkles className="w-3 h-3 text-[#e5c158]" />
                     <span>{item.badge}</span>
                   </div>

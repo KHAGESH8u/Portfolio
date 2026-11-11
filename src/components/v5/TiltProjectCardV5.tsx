@@ -77,12 +77,12 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
           rotateY,
           transformStyle: 'preserve-3d'
         }}
-        className="group relative rounded-3xl bg-gradient-to-b from-[#150826]/90 via-[#0e051a]/95 to-[#07020d] border border-[#d4af37]/25 p-1 hover:border-[#eed98d]/60 transition-colors duration-500 shadow-[0_20px_50px_rgba(7,2,13,0.9)] overflow-hidden"
+        className="group relative rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-1 hover:border-[#eed98d]/60 transition-colors duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden"
       >
         {/* Soft golden aura on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#38165e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-        <div className="relative rounded-[22px] overflow-hidden bg-[#0e051a]/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between h-full">
+        <div className="relative rounded-[22px] overflow-hidden bg-black/40 backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between h-full">
           
           {/* Top header: Archival index and links */}
           <div className="flex items-center justify-between mb-5 z-10">
@@ -98,7 +98,7 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-full bg-[#180a2b]/60 hover:bg-[#261042] text-slate-300 hover:text-[#e5c158] border border-[#d4af37]/20 transition-all duration-200"
+                className="p-2 rounded-full bg-black/40 hover:bg-black/70 text-slate-300 hover:text-[#e5c158] border border-[#d4af37]/25 transition-all duration-200"
                 aria-label="Repository"
               >
                 <GitBranch className="w-4 h-4" />
@@ -107,7 +107,7 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-full bg-[#180a2b]/60 hover:bg-[#261042] text-slate-300 hover:text-[#e5c158] border border-[#d4af37]/20 transition-all duration-200"
+                className="p-2 rounded-full bg-black/40 hover:bg-black/70 text-slate-300 hover:text-[#e5c158] border border-[#d4af37]/25 transition-all duration-200"
                 aria-label="Exhibition"
               >
                 <ExternalLink className="w-4 h-4" />
@@ -116,9 +116,10 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
           </div>
 
           {/* Luxury Browser Mockup Frame with Antique Gold Accents */}
-          <div className="relative w-full rounded-2xl overflow-hidden mb-6 border border-[#d4af37]/25 shadow-2xl bg-[#07020d]">
+          <div className="relative w-full rounded-2xl overflow-hidden mb-6 border border-[#d4af37]/25 shadow-2xl bg-black/40">
             {/* Browser top chrome */}
-            <div className="h-9 bg-[#07020d] border-b border-[#d4af37]/20 px-3.5 flex items-center justify-between">
+            <div className="h-9 bg-black/50 border-b border-[#d4af37]/20 px-3.5 flex items-center justify-between">
+              {/* Antique gold/brass style dots */}
               <div className="flex items-center space-x-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#e5c158]/80" />
                 <span className="w-2 h-2 rounded-full bg-[#d4af37]/60" />
@@ -126,7 +127,7 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
               </div>
 
               {/* URL address pill */}
-              <div className="flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-[#150826]/70 border border-[#d4af37]/15 text-[10px] font-mono text-[#d4af37]/80 max-w-[200px] sm:max-w-xs truncate">
+              <div className="flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-black/40 border border-[#d4af37]/20 text-[10px] font-mono text-[#d4af37]/80 max-w-[200px] sm:max-w-xs truncate">
                 <Lock className="w-2.5 h-2.5 text-[#e5c158] shrink-0" />
                 <span className="truncate">{getBrowserUrl()}</span>
               </div>
@@ -135,14 +136,14 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
             </div>
 
             {/* Application Mockup Image */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-[#07020d]">
+            <div className="relative aspect-[16/10] overflow-hidden bg-black/40">
               <img
                 src={project.image}
                 alt={project.subtitle}
                 className="w-full h-full object-cover object-top filter contrast-[105%] group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#0e051a]/40 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
 
@@ -158,10 +159,10 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
           </div>
 
           {/* Key Metrics in Gold Frame */}
-          <div className="grid grid-cols-3 gap-2 py-3 mb-5 border-y border-[#d4af37]/15 bg-[#150826]/40 rounded-xl px-2">
+          <div className="grid grid-cols-3 gap-2 py-3 mb-5 border-y border-[#d4af37]/20 bg-black/30 rounded-xl px-2">
             {project.metrics.map((metric, i) => (
               <div key={i} className="text-center">
-                <div className="text-[9px] font-mono uppercase tracking-widest text-[#d4af37]/70">
+                <div className="text-[9px] font-mono uppercase tracking-widest text-[#d4af37]/80">
                   {metric.label}
                 </div>
                 <div className="text-sm font-serif text-[#fcf8e8] mt-0.5">
@@ -176,7 +177,7 @@ export const TiltProjectCardV5: React.FC<TiltProjectCardV5Props> = ({ project, i
             {project.tags.map((tag, tagIndex) => (
               <span
                 key={tagIndex}
-                className="px-3 py-1 text-xs font-serif tracking-wider rounded-lg bg-[#150826]/80 border border-[#d4af37]/20 text-[#eed98d] group-hover:border-[#eed98d]/40 transition-colors"
+                className="px-3 py-1 text-xs font-serif tracking-wider rounded-lg bg-black/40 border border-[#d4af37]/25 text-[#eed98d] group-hover:border-[#eed98d]/40 transition-colors"
               >
                 {tag}
               </span>

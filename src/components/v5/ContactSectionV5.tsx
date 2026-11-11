@@ -29,7 +29,7 @@ export const ContactSectionV5: React.FC = () => {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-20 pointer-events-none">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
           <span>CHAPTER VI</span>
           <span>//</span>
           <span>COMMUNICATION</span>
@@ -54,14 +54,14 @@ export const ContactSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20 }}
           className="lg:col-span-5 space-y-6 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 shadow-2xl">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 shadow-2xl">
             <h3 className="font-serif text-2xl font-normal text-white mb-8 pb-4 border-b border-[#d4af37]/15">
               Studio Despatch
             </h3>
 
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="w-10 h-10 rounded-2xl bg-[#150826] border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-black/50 border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ export const ContactSectionV5: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-10 h-10 rounded-2xl bg-[#150826] border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-black/50 border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ export const ContactSectionV5: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-10 h-10 rounded-2xl bg-[#150826] border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-black/50 border border-[#d4af37]/30 flex items-center justify-center text-[#e5c158] shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -106,7 +106,7 @@ export const ContactSectionV5: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-10 p-5 rounded-2xl bg-[#150826]/60 border border-[#d4af37]/20 font-serif text-xs text-[#eed98d]/90 leading-relaxed italic">
+            <div className="mt-10 p-5 rounded-2xl bg-black/30 border border-[#d4af37]/20 font-serif text-xs text-[#eed98d]/90 leading-relaxed italic">
               &quot;Every project begins with a conversation about scale, proportion, and aesthetic integrity.&quot;
             </div>
           </div>
@@ -120,14 +120,14 @@ export const ContactSectionV5: React.FC = () => {
           transition={{ type: 'spring', stiffness: 90, damping: 20 }}
           className="lg:col-span-7 pointer-events-auto"
         >
-          <div className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+          <div className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="py-16 text-center space-y-4"
               >
-                <div className="w-16 h-16 rounded-full bg-[#150826] border border-[#d4af37] mx-auto flex items-center justify-center text-[#e5c158] shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+                <div className="w-16 h-16 rounded-full bg-black/50 border border-[#d4af37] mx-auto flex items-center justify-center text-[#e5c158] shadow-[0_0_30px_rgba(212,175,55,0.4)]">
                   <CheckCircle className="w-8 h-8" />
                 </div>
                 <h4 className="font-serif text-2xl font-normal text-white">
@@ -138,7 +138,7 @@ export const ContactSectionV5: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="mt-6 px-6 py-2.5 rounded-full font-serif text-xs tracking-widest text-[#eed98d] bg-[#150826] border border-[#d4af37]/40 hover:bg-[#261042] transition-colors uppercase"
+                  className="mt-6 px-6 py-2.5 rounded-full font-serif text-xs tracking-widest text-[#eed98d] bg-black/40 border border-[#d4af37]/40 hover:bg-black/60 transition-colors uppercase"
                 >
                   Send Another Inquiry
                 </button>
@@ -156,7 +156,7 @@ export const ContactSectionV5: React.FC = () => {
                       placeholder="Lord / Lady / Colleague"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-[#07020d] border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-600 transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl bg-black/50 border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-500 transition-colors"
                     />
                   </div>
 
@@ -170,7 +170,7 @@ export const ContactSectionV5: React.FC = () => {
                       placeholder="client@organization.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-[#07020d] border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-600 transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl bg-black/50 border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -182,12 +182,12 @@ export const ContactSectionV5: React.FC = () => {
                   <select
                     value={formData.topic}
                     onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-[#07020d] border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white transition-colors"
+                    className="w-full px-4 py-3 rounded-2xl bg-black/50 border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white transition-colors"
                   >
-                    <option value="executive" className="bg-[#0e051a] text-white">Principal / Staff Engineering Appointment</option>
-                    <option value="advisory" className="bg-[#0e051a] text-white">AI Architecture & Strategy Advisory</option>
-                    <option value="creative" className="bg-[#0e051a] text-white">High-End WebGL / Spatial Commission</option>
-                    <option value="general" className="bg-[#0e051a] text-white">Confidential Technical Dialogue</option>
+                    <option value="executive" className="bg-black text-white">Principal / Staff Engineering Appointment</option>
+                    <option value="advisory" className="bg-black text-white">AI Architecture & Strategy Advisory</option>
+                    <option value="creative" className="bg-black text-white">High-End WebGL / Spatial Commission</option>
+                    <option value="general" className="bg-black text-white">Confidential Technical Dialogue</option>
                   </select>
                 </div>
 
@@ -201,7 +201,7 @@ export const ContactSectionV5: React.FC = () => {
                     placeholder="Describe your architectural vision or opportunity..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-[#07020d] border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-600 transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-2xl bg-black/50 border border-[#d4af37]/25 focus:border-[#eed98d] focus:outline-none focus:ring-1 focus:ring-[#eed98d] text-sm text-white placeholder-slate-500 transition-colors resize-none"
                   />
                 </div>
 

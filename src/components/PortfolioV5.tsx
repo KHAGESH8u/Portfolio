@@ -28,19 +28,19 @@ export const PortfolioV5: React.FC = () => {
   const isUiReady = phase === 'ui-ready';
 
   return (
-    <div className="relative min-h-screen bg-[#07020d] text-slate-100 selection:bg-[#d4af37] selection:text-black overflow-x-hidden font-sans">
-      {/* Version 5 Custom Intricate Biometric AI Core Boot Loader */}
+    <div className="relative min-h-screen text-slate-100 selection:bg-[#d4af37] selection:text-black overflow-x-hidden font-sans isolate">
+      {/* Version 5 Custom Tech-Driven Biometric AI Core Boot Loader */}
       <AnimatePresence mode="wait">
         {phase === 'booting' && (
           <BootSequenceV5 onComplete={handleBootComplete} />
         )}
       </AnimatePresence>
 
-      {/* 1. Global Viewport-Fixed Glowing Antique Gold Neural Mesh & Cosmic Starfield (Revealed FIRST, z-[-1]) */}
+      {/* 1. Global Viewport-Fixed Glowing Antique Gold Neural Mesh & Cosmic Starfield (Revealed FIRST, fixed inset-0 z-[-1]) */}
       <GlobalNeuralGoldCanvas />
 
       {/* Subtle royal background grid texture overlay */}
-      <div className="fixed inset-0 bg-grid-pattern opacity-25 pointer-events-none z-0" />
+      <div className="fixed inset-0 bg-grid-pattern opacity-15 pointer-events-none z-0" />
 
       {/* Staggered Fade & Float of UI Navigation & Main Architecture (0.5s delay after 3D canvas reveal) */}
       <motion.div

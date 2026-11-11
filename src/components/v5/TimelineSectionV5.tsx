@@ -18,7 +18,7 @@ export const TimelineSectionV5: React.FC = () => {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-20 pointer-events-none">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#150826] border border-[#d4af37]/30 text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/40 border border-[#d4af37]/30 backdrop-blur-md text-xs font-serif text-[#eed98d] tracking-widest uppercase mb-4 pointer-events-auto">
           <span>CHAPTER IV</span>
           <span>//</span>
           <span>CHRONOLOGY</span>
@@ -35,7 +35,7 @@ export const TimelineSectionV5: React.FC = () => {
 
       {/* Filter switches */}
       <div className="flex justify-center mb-16 pointer-events-auto">
-        <div className="inline-flex p-1.5 rounded-full bg-[#0e051a]/90 border border-[#d4af37]/25 backdrop-blur-xl">
+        <div className="inline-flex p-1.5 rounded-full bg-black/40 border border-[#d4af37]/25 backdrop-blur-md">
           <button
             onClick={() => setFilter('all')}
             className={`px-5 py-2 rounded-full text-xs font-serif tracking-widest uppercase transition-all duration-300 ${
@@ -92,7 +92,7 @@ export const TimelineSectionV5: React.FC = () => {
                 >
                   <div className="relative flex items-center justify-center">
                     <div className="absolute w-8 h-8 rounded-full bg-[#d4af37]/20 blur-md group-hover:bg-[#e5c158]/40 transition-all duration-300" />
-                    <div className="w-6 h-6 rounded-full border-2 border-[#d4af37] bg-[#07020d] flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                    <div className="w-6 h-6 rounded-full border-2 border-[#d4af37] bg-black/80 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-[0_0_15px_rgba(212,175,55,0.5)]">
                       <div className="w-2 h-2 rounded-full bg-[#eed98d]" />
                     </div>
                   </div>
@@ -104,11 +104,11 @@ export const TimelineSectionV5: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ type: 'spring', stiffness: 100, damping: 20, delay: index * 0.1 }}
-                  className="rounded-3xl bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/25 p-6 sm:p-8 hover:border-[#eed98d]/50 transition-all duration-300 shadow-[0_15px_40px_rgba(7,2,13,0.7)] pointer-events-auto"
+                  className="rounded-3xl bg-black/40 backdrop-blur-md border border-[#d4af37]/25 p-6 sm:p-8 hover:border-[#eed98d]/50 transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.7)] pointer-events-auto"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <div className="flex items-center space-x-2">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-serif bg-[#150826] text-[#eed98d] border border-[#d4af37]/30">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-serif bg-black/40 text-[#eed98d] border border-[#d4af37]/30">
                         <Calendar className="w-3.5 h-3.5 text-[#e5c158]" />
                         {item.period}
                       </span>

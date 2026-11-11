@@ -7,7 +7,7 @@ export const FooterV5: React.FC = () => {
   };
 
   return (
-    <footer className="relative border-t border-[#d4af37]/20 bg-[#07020d] py-14 px-4 sm:px-6 lg:px-8 pointer-events-auto">
+    <footer className="relative border-t border-[#d4af37]/25 bg-black/50 backdrop-blur-md py-14 px-4 sm:px-6 lg:px-8 pointer-events-auto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Brand identity */}
         <div className="flex items-center space-x-3">

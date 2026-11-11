@@ -1,42 +1,52 @@
-import React, { useRef, useMemo, useEffect, useState } from 'react';
+import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-// 1. Continuous Ethereal Cosmic Starfield (Deep Background)
-const StardustField = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const scrollYRef = useRef(0);
-  const starCount = 450;
+// Global mouse tracker for responsive cursor interaction
+const mouseState = {
+  x: 0,
+  y: 0,
+  targetX: 0,
+  targetY: 0
+};
 
-  useEffect(() => {
-    const handleScroll = () => {
-      scrollYRef.current = window.scrollY;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+if (typeof window !== 'undefined') {
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      mouseState.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseState.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    },
+    { passive: true }
+  );
+}
+
+// 1. Cosmic Stardust Background Field
+const CosmicStarfield = () => {
+  const pointsRef = useRef<THREE.Points>(null);
+  const starCount = 500;
 
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(starCount * 3);
     const cols = new Float32Array(starCount * 3);
 
-    const goldColor = new THREE.Color('#eed98d');
-    const champagneColor = new THREE.Color('#fcf8e8');
-    const aubergineColor = new THREE.Color('#9d4edd');
+    const gold = new THREE.Color('#eed98d');
+    const champagne = new THREE.Color('#fcf8e8');
+    const aubergine = new THREE.Color('#c084fc');
     const tempCol = new THREE.Color();
 
     for (let i = 0; i < starCount; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 36;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 36;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 22;
+      pos[i * 3] = (Math.random() - 0.5) * 40;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 40;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 25 - 2;
 
-      const rand = Math.random();
-      if (rand < 0.55) {
-        tempCol.copy(goldColor);
-      } else if (rand < 0.82) {
-        tempCol.copy(champagneColor);
+      const r = Math.random();
+      if (r < 0.55) {
+        tempCol.copy(gold);
+      } else if (r < 0.85) {
+        tempCol.copy(champagne);
       } else {
-        tempCol.copy(aubergineColor);
+        tempCol.copy(aubergine);
       }
 
       cols[i * 3] = tempCol.r;
@@ -47,24 +57,10 @@ const StardustField = () => {
     return [pos, cols];
   }, [starCount]);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (pointsRef.current) {
       pointsRef.current.rotation.y += delta * 0.012;
       pointsRef.current.rotation.x += delta * 0.006;
-
-      const targetY = scrollYRef.current * 0.001;
-      pointsRef.current.position.y = THREE.MathUtils.lerp(
-        pointsRef.current.position.y,
-        targetY,
-        0.05
-      );
-
-      const targetRotZ = state.pointer.x * 0.04;
-      pointsRef.current.rotation.z = THREE.MathUtils.lerp(
-        pointsRef.current.rotation.z,
-        targetRotZ,
-        0.05
-      );
     }
   });
 
@@ -75,10 +71,10 @@ const StardustField = () => {
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.055}
+        size={0.065}
         vertexColors
         transparent
-        opacity={0.4}
+        opacity={0.45}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
@@ -86,42 +82,36 @@ const StardustField = () => {
   );
 };
 
-// 2. Glowing Antique Gold Fluid Neural Mesh & Synaptic Constellation
-interface NeuralMeshProps {
-  mouseState: { x: number; y: number };
-}
-
-const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
+// 2. High-Visibility Interactive Antique Gold Neural Data-Mesh
+const NeuralGoldMesh = () => {
   const groupRef = useRef<THREE.Group>(null);
   const linesRef = useRef<THREE.LineSegments>(null);
   const nodesRef = useRef<THREE.Points>(null);
   const pulsesRef = useRef<THREE.Points>(null);
 
-  const nodeCount = 130;
-  const maxDistance = 3.2;
+  const nodeCount = 150;
+  const maxDistance = 3.3;
 
-  // Generate initial node positions, velocities, and golden palettes
   const [nodeData, lineGeometry, pulseData] = useMemo(() => {
     const positions = new Float32Array(nodeCount * 3);
     const basePositions = new Float32Array(nodeCount * 3);
     const nodeColors = new Float32Array(nodeCount * 3);
-    const velocities = new Float32Array(nodeCount * 3);
 
+    const goldBright = new THREE.Color('#fcf8e8');
     const goldPrimary = new THREE.Color('#eed98d');
-    const goldSpecular = new THREE.Color('#fcf8e8');
     const goldDeep = new THREE.Color('#d4af37');
 
     for (let i = 0; i < nodeCount; i++) {
-      // Natural organic ellipsoid distribution focused in upper-mid space
+      // Natural spatial ellipsoid
       const u = Math.random();
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = Math.cbrt(Math.random()) * 8.5;
+      const r = Math.cbrt(Math.random()) * 9.0;
 
       const x = r * Math.sin(phi) * Math.cos(theta) * 1.5;
-      const y = r * Math.sin(phi) * Math.sin(theta) * 1.1 + 0.5;
-      const z = (r * Math.cos(phi)) * 0.9 - 1.0;
+      const y = r * Math.sin(phi) * Math.sin(theta) * 1.15 + 0.2;
+      const z = r * Math.cos(phi) * 0.95;
 
       positions[i * 3] = x;
       positions[i * 3 + 1] = y;
@@ -131,19 +121,14 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
       basePositions[i * 3 + 1] = y;
       basePositions[i * 3 + 2] = z;
 
-      // Gentle organic drift speeds
-      velocities[i * 3] = (Math.random() - 0.5) * 0.006;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.006;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
-
-      const pick = Math.random();
-      const col = pick < 0.6 ? goldPrimary : pick < 0.85 ? goldSpecular : goldDeep;
-      nodeColors[i * 3] = col.r;
-      nodeColors[i * 3 + 1] = col.g;
-      nodeColors[i * 3 + 2] = col.b;
+      const p = Math.random();
+      const c = p < 0.35 ? goldBright : p < 0.75 ? goldPrimary : goldDeep;
+      nodeColors[i * 3] = c.r;
+      nodeColors[i * 3 + 1] = c.g;
+      nodeColors[i * 3 + 2] = c.b;
     }
 
-    // Build line segments between nearby nodes
+    // Connect nodes within maxDistance
     const lineIndices: number[] = [];
     for (let i = 0; i < nodeCount; i++) {
       for (let j = i + 1; j < nodeCount; j++) {
@@ -168,8 +153,8 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
     const geom = new THREE.BufferGeometry();
     geom.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
 
-    // Data flow action-potential pulses
-    const pulseCount = 36;
+    // Data Action-Potential Pulses
+    const pulseCount = 45;
     const pulsePos = new Float32Array(pulseCount * 3);
     const pulseMeta: { lineA: number; lineB: number; progress: number; speed: number }[] = [];
 
@@ -182,7 +167,7 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
         lineA: a,
         lineB: b,
         progress: Math.random(),
-        speed: 0.005 + Math.random() * 0.008
+        speed: 0.006 + Math.random() * 0.009
       });
       pulsePos[p * 3] = positions[a * 3];
       pulsePos[p * 3 + 1] = positions[a * 3 + 1];
@@ -190,30 +175,34 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
     }
 
     return [
-      { positions, basePositions, nodeColors, velocities },
+      { positions, basePositions, nodeColors },
       { geom, lineIndices },
       { pulsePos, pulseMeta }
     ];
   }, [nodeCount, maxDistance]);
 
   useFrame((state) => {
+    // Smooth mouse lerping
+    mouseState.x = THREE.MathUtils.lerp(mouseState.x, mouseState.targetX, 0.06);
+    mouseState.y = THREE.MathUtils.lerp(mouseState.y, mouseState.targetY, 0.06);
+
     const time = state.clock.getElapsedTime();
 
-    // 1. Gently animate node positions with sinusoidal wave turbulence
+    // 1. Organic wave undulation of synaptic nodes
     const pos = nodeData.positions;
     const base = nodeData.basePositions;
     for (let i = 0; i < nodeCount; i++) {
-      const offset = i * 0.35;
-      pos[i * 3] = base[i * 3] + Math.sin(time * 0.6 + offset) * 0.28;
-      pos[i * 3 + 1] = base[i * 3 + 1] + Math.cos(time * 0.5 + offset * 1.3) * 0.24;
-      pos[i * 3 + 2] = base[i * 3 + 2] + Math.sin(time * 0.4 + offset * 0.8) * 0.2;
+      const offset = i * 0.42;
+      pos[i * 3] = base[i * 3] + Math.sin(time * 0.7 + offset) * 0.32;
+      pos[i * 3 + 1] = base[i * 3 + 1] + Math.cos(time * 0.6 + offset * 1.2) * 0.28;
+      pos[i * 3 + 2] = base[i * 3 + 2] + Math.sin(time * 0.5 + offset * 0.9) * 0.24;
     }
 
     if (nodesRef.current) {
       nodesRef.current.geometry.attributes.position.needsUpdate = true;
     }
 
-    // 2. Update line segments connecting active nodes
+    // 2. Line segment updates
     if (linesRef.current) {
       const linePosAttr = linesRef.current.geometry.attributes.position;
       const linePositions = linePosAttr.array as Float32Array;
@@ -228,7 +217,7 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
       linePosAttr.needsUpdate = true;
     }
 
-    // 3. Update traveling action-potential pulses along synapses
+    // 3. Traveling action potential pulses
     if (pulsesRef.current) {
       const pulsePosAttr = pulsesRef.current.geometry.attributes.position;
       const pArr = pulsePosAttr.array as Float32Array;
@@ -259,61 +248,66 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
       pulsePosAttr.needsUpdate = true;
     }
 
-    // 4. Fluid cursor interaction and slow global rotation
+    // 4. Cursor reactivity and 3D fluid tilt
     if (groupRef.current) {
       groupRef.current.rotation.y = THREE.MathUtils.lerp(
         groupRef.current.rotation.y,
-        mouseState.x * 0.25,
-        0.04
+        mouseState.x * 0.35,
+        0.05
       );
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
-        -mouseState.y * 0.18,
-        0.04
+        -mouseState.y * 0.25,
+        0.05
       );
-      groupRef.current.position.y = Math.sin(time * 0.5) * 0.18;
+      groupRef.current.position.x = THREE.MathUtils.lerp(
+        groupRef.current.position.x,
+        mouseState.x * 0.6,
+        0.05
+      );
+      groupRef.current.position.y = Math.sin(time * 0.5) * 0.2 + mouseState.y * 0.4;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Synaptic connecting lines in subtle Antique Gold */}
+      {/* High-visibility Antique Gold connecting lines */}
       <lineSegments ref={linesRef} geometry={lineGeometry.geom}>
         <lineBasicMaterial
           color="#d4af37"
           transparent
-          opacity={0.24}
+          opacity={0.42}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* Synaptic nodes */}
+      {/* Radiant golden synaptic nodes */}
       <points ref={nodesRef}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[nodeData.positions, 3]} />
           <bufferAttribute attach="attributes-color" args={[nodeData.nodeColors, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.11}
+          size={0.16}
           vertexColors
           transparent
-          opacity={0.88}
+          opacity={0.95}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </points>
 
-      {/* Traveling pulses */}
+      {/* Action-potential pulses */}
       <points ref={pulsesRef}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[pulseData.pulsePos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.17}
-          color="#fcf8e8"
+          size={0.24}
+          color="#ffffff"
           transparent
-          opacity={0.95}
+          opacity={1.0}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -323,38 +317,39 @@ const NeuralGoldConstellation: React.FC<NeuralMeshProps> = ({ mouseState }) => {
 };
 
 export const GlobalNeuralGoldCanvas: React.FC = () => {
-  const [mouseState, setMouseState] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-      setMouseState({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
-      {/* Deep Aubergine Base with Ambient Radial Lighting */}
-      <div className="absolute inset-0 bg-[#07020d]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(98,34,165,0.30)_0%,rgba(55,18,95,0.18)_42%,transparent_75%)] pointer-events-none" />
-      <div className="absolute top-1/4 right-1/4 w-[750px] h-[750px] bg-[#d4af37]/8 rounded-full blur-[200px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-[650px] h-[650px] bg-[#4a154b]/20 rounded-full blur-[190px] pointer-events-none" />
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-[#07020d]">
+      {/* Deep Aubergine Ambient Radial Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(126,34,206,0.35)_0%,rgba(55,18,95,0.22)_45%,transparent_75%)] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-[750px] h-[750px] bg-[#d4af37]/12 rounded-full blur-[200px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[650px] h-[650px] bg-[#581c87]/25 rounded-full blur-[190px] pointer-events-none" />
 
-      {/* 3D WebGL Canvas */}
+      {/* 3D WebGL Canvas fixed to viewport background */}
       <Canvas
-        camera={{ position: [0, 0, 11], fov: 50 }}
+        camera={{ position: [0, 0, 9.5], fov: 50 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-        style={{ pointerEvents: 'none' }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance'
+        }}
       >
-        <ambientLight intensity={0.6} />
-        <StardustField />
-        <NeuralGoldConstellation mouseState={mouseState} />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.8} color="#2e1065" />
+          <pointLight position={[6, 6, 6]} intensity={3.0} color="#eed98d" />
+          <pointLight position={[-6, -4, 4]} intensity={2.2} color="#d4af37" />
+          <pointLight position={[0, 4, 8]} intensity={2.5} color="#fcf8e8" />
+
+          {/* Deep Cosmic Starfield */}
+          <CosmicStarfield />
+
+          {/* High-Visibility Antique Gold Neural Mesh */}
+          <NeuralGoldMesh />
+        </Suspense>
       </Canvas>
+
+      {/* Gentle vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 pointer-events-none" />
     </div>
   );
 };

@@ -33,8 +33,8 @@ export const NavbarV5: React.FC = () => {
         <div
           className={`relative flex items-center justify-between px-6 py-3.5 rounded-full transition-all duration-500 pointer-events-auto ${
             scrolled
-              ? 'bg-[#0e051a]/85 backdrop-blur-2xl border border-[#d4af37]/25 shadow-[0_15px_40px_rgba(7,2,13,0.7)]'
-              : 'bg-[#150826]/40 backdrop-blur-md border border-[#d4af37]/15'
+              ? 'bg-black/50 backdrop-blur-md border border-[#d4af37]/35 shadow-[0_15px_40px_rgba(0,0,0,0.8)]'
+              : 'bg-black/30 backdrop-blur-md border border-[#d4af37]/20 shadow-lg'
           }`}
         >
           {/* Brand Insignia */}
@@ -98,7 +98,7 @@ export const NavbarV5: React.FC = () => {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden px-4 pt-3 pointer-events-auto"
           >
-            <div className="rounded-3xl bg-[#0e051a]/95 backdrop-blur-2xl border border-[#d4af37]/30 p-6 space-y-4 shadow-2xl">
+            <div className="rounded-3xl bg-black/80 backdrop-blur-md border border-[#d4af37]/35 p-6 space-y-4 shadow-2xl">
               <nav className="flex flex-col space-y-2">
                 {navLinks.map((link) => (
                   <a
