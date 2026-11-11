@@ -1,126 +1,167 @@
 import { ProjectItem, SkillCategory, TimelineItem, AchievementItem } from '../types';
 
+export interface AboutData {
+  title: string;
+  subtitle: string;
+  bioParagraph1: string;
+  bioParagraph2: string;
+  quickFacts: {
+    label: string;
+    value: string;
+  }[];
+  focusAreas: string[];
+}
+
 export const HERO_DATA = {
-  systemTag: "SYSTEM STATUS: OPERATIONAL // V4.9.2_PRODUCTION",
-  name: "ALEXANDER VANCE",
-  role: "AI & DATA SCIENCE ENGINEER",
-  subRole: "NEURAL ARCHITECTURE & DISTRIBUTED SYSTEMS",
-  summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  ctaPrimary: "EXPLORE MATRIX",
-  ctaSecondary: "INITIATE TRANSMISSION"
+  statusBadge: "Available for Senior & Advisory Opportunities",
+  location: "San Francisco, CA & Global Remote",
+  greeting: "Hello, my name is",
+  name: "Alexander Vance",
+  role: "AI & Full-Stack Systems Engineer",
+  tagline: "Bridging complex artificial intelligence models with intuitive, high-performance web experiences.",
+  summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+  ctaPrimary: "View Projects",
+  ctaSecondary: "Get in Touch"
+};
+
+export const ABOUT_DATA: AboutData = {
+  title: "About Me",
+  subtitle: "Engineer, Architect & Creative Developer",
+  bioParagraph1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed felis ut arcu bibendum elementum. Ut fermentum sapien nec mauris dapibus, non sodales urna sagittis. Vivamus ac dolor ut justo cursus varius vitae non sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sit amet est nec ipsum consequat auctor ac ac sapien.",
+  bioParagraph2: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque velit ac tellus finibus, vel dictum mauris pulvinar. Nullam et ex sit amet eros eleifend vulputate. Integer id nulla vel est suscipit bibendum. Fusce fermentum leo nec lectus facilisis, at commodo eros pharetra. Proin facilisis felis non dolor gravida cursus.",
+  quickFacts: [
+    { label: "Experience", value: "7+ Years" },
+    { label: "Shipped Projects", value: "24+ Products" },
+    { label: "Open Source", value: "12k+ Stars" },
+    { label: "Global Users", value: "500k+ Active" }
+  ],
+  focusAreas: [
+    "Full-Stack Web Architectures",
+    "Real-time WebGL & Creative Coding",
+    "Applied Machine Learning & LLMs",
+    "Distributed Backend Infrastructure"
+  ]
 };
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    id: "core-competencies",
-    title: "Core Competencies",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-    iconName: "Cpu",
+    id: "languages-core",
+    title: "Languages & Core Runtimes",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fundamental programming languages and core runtime environments.",
+    iconName: "Code2",
     skills: [
-      { name: "Distributed Computing", level: 95, highlight: true },
-      { name: "High-Performance Systems", level: 92, highlight: true },
-      { name: "Cloud Architecture", level: 90 },
-      { name: "Algorithm Optimization", level: 88 },
-      { name: "Microservices", level: 86 }
+      { name: "TypeScript", level: 95 },
+      { name: "Python", level: 92 },
+      { name: "Rust", level: 85 },
+      { name: "Go", level: 88 },
+      { name: "JavaScript (ESNext)", level: 96 },
+      { name: "SQL & PostgreSQL", level: 90 },
+      { name: "C++", level: 82 }
     ]
   },
   {
-    id: "tech-frameworks",
-    title: "Technical Frameworks",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    iconName: "Layers",
+    id: "frontend-creative",
+    title: "Frontend & Creative Tech",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Modern UI frameworks, 3D graphics engines, and motion libraries.",
+    iconName: "Palette",
     skills: [
-      { name: "React & Three.js", level: 96, highlight: true },
-      { name: "TypeScript", level: 94, highlight: true },
-      { name: "Python / FastAPI", level: 90 },
-      { name: "Node.js & Go", level: 85 },
-      { name: "Docker & Kubernetes", level: 88 }
+      { name: "React 18 / Next.js", level: 96 },
+      { name: "Three.js / React Three Fiber", level: 92 },
+      { name: "Tailwind CSS", level: 95 },
+      { name: "Framer Motion", level: 94 },
+      { name: "GLSL & Shaders", level: 84 },
+      { name: "Web Audio API", level: 80 },
+      { name: "Vite & Build Tooling", level: 90 }
     ]
   },
   {
-    id: "ml-tools",
-    title: "Machine Learning Tools",
-    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.",
-    iconName: "BrainCircuit",
+    id: "ai-systems",
+    title: "AI & Machine Learning",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Deep learning frameworks, embeddings, and intelligent agent workflows.",
+    iconName: "Brain",
     skills: [
-      { name: "PyTorch & TensorRT", level: 94, highlight: true },
-      { name: "Transformer Architectures", level: 91, highlight: true },
-      { name: "Vector Databases", level: 89 },
-      { name: "CUDA Acceleration", level: 84 },
-      { name: "MLOps Pipelines", level: 87 }
+      { name: "PyTorch", level: 90 },
+      { name: "TensorFlow", level: 86 },
+      { name: "LangChain & LlamaIndex", level: 92 },
+      { name: "Vector Databases", level: 91 },
+      { name: "Hugging Face Models", level: 89 },
+      { name: "Fine-Tuning & Quantization", level: 85 }
     ]
   },
   {
-    id: "soft-skills",
-    title: "Operational Leadership",
-    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-    iconName: "ShieldCheck",
+    id: "backend-cloud",
+    title: "Backend & Cloud Infrastructure",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scalable cloud architectures, container orchestration, and serverless.",
+    iconName: "Cloud",
     skills: [
-      { name: "Cross-Functional Leadership", level: 92 },
-      { name: "Technical Strategy", level: 95, highlight: true },
-      { name: "Systemic Problem Solving", level: 94 },
-      { name: "Engineering Mentorship", level: 88 }
+      { name: "Docker & Kubernetes", level: 89 },
+      { name: "Amazon Web Services (AWS)", level: 91 },
+      { name: "FastAPI & Express", level: 94 },
+      { name: "Redis & Caching", level: 88 },
+      { name: "GraphQL & RESTful APIs", level: 93 },
+      { name: "CI/CD & GitHub Actions", level: 90 }
     ]
   }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    id: "neural-synthesizer",
-    title: "PROJECT: SYNTHEX-01",
-    subtitle: "Real-Time Neural Audio & Spectral Synthesizer",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque euismod venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi integer interdum.",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-    tags: ["PyTorch", "WebGL", "Rust", "WebAudio API", "FastAPI"],
+    id: "ai-workspace-platform",
+    title: "AI WORKSPACE",
+    subtitle: "Synapse: Real-Time Collaborative Canvas",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A modern web application allowing cross-functional engineering teams to orchestrate AI workflows, draft architectures, and deploy intelligent assistance in real time.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    tags: ["React", "TypeScript", "Python", "FastAPI", "WebSockets"],
     metrics: [
-      { label: "Latency", value: "< 4.2ms" },
-      { label: "Throughput", value: "100k req/s" },
-      { label: "Inference", value: "16x Speedup" }
+      { label: "Active Users", value: "45,000+" },
+      { label: "Sync Latency", value: "< 16ms" },
+      { label: "Productivity", value: "+42%" }
     ],
     githubUrl: "https://github.com",
     liveUrl: "https://example.com"
   },
   {
-    id: "quantum-graph-core",
-    title: "PROJECT: VORTEX-GRAPH",
-    subtitle: "Distributed Knowledge Tensor Visualizer",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere lectus at risus sodales sollicitudin. Proin ut sem sed magna convallis feugiat a eu elit. Curabitur vel turpis ac velit consequat auctor.",
-    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80",
-    tags: ["Three.js", "TypeScript", "gRPC", "Neo4j", "Docker"],
+    id: "spatial-analytics-dashboard",
+    title: "DATA ANALYTICS",
+    subtitle: "Horizon: Spatial Observability & Metrics",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. An interactive data observability platform featuring 3D dimensional cluster visualization, performance telemetry, and automated anomaly alerts.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    tags: ["Next.js", "Three.js", "Tailwind CSS", "Go", "PostgreSQL"],
     metrics: [
-      { label: "Node Capacity", value: "10M+ Vertices" },
-      { label: "FPS Stability", value: "60 FPS Fixed" },
-      { label: "Memory Footprint", value: "-45% Overhead" }
+      { label: "Daily Events", value: "12M+" },
+      { label: "Frame Rate", value: "60 FPS" },
+      { label: "Crash Rate", value: "< 0.01%" }
     ],
     githubUrl: "https://github.com",
     liveUrl: "https://example.com"
   },
   {
-    id: "autonomous-swarm-engine",
-    title: "PROJECT: AEGIS-SWARM",
-    subtitle: "Autonomous Multi-Agent Consensus Protocol",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
-    tags: ["Go", "Kubernetes", "Raft Consensus", "Kafka", "Prometheus"],
+    id: "fintech-payments-app",
+    title: "MODERN FINTECH",
+    subtitle: "Aura: Digital Asset & Wealth Management",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A modern banking interface offering intelligent portfolio balancing, real-time transaction streaming, and institutional-grade biometric security.",
+    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+    tags: ["React Native", "TypeScript", "Node.js", "Stripe API", "AWS"],
     metrics: [
-      { label: "Agent Capacity", value: "50,000 Nodes" },
-      { label: "Fault Recovery", value: "< 120ms" },
-      { label: "Consensus SLA", value: "99.999%" }
+      { label: "Volume Processed", value: "$80M+" },
+      { label: "App Rating", value: "4.9 / 5.0" },
+      { label: "Conversion", value: "+28%" }
     ],
     githubUrl: "https://github.com",
     liveUrl: "https://example.com"
   },
   {
-    id: "hyper-dimensional-vault",
-    title: "PROJECT: KRONOS-SIM",
-    subtitle: "High-Dimensional Simulation & Vector Clustering Engine",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id dui. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui.",
-    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
-    tags: ["CUDA", "C++20", "Python", "Ray", "Triton"],
+    id: "creative-cloud-studio",
+    title: "CREATIVE COMPUTING",
+    subtitle: "Prism: Shader Studio & Asset Pipeline",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A browser-based creative coding suite allowing digital artists to build, preview, and export high-performance GLSL shader effects and 3D assets.",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+    tags: ["WebGL", "Three.js", "WebAssembly", "Rust", "Tailwind CSS"],
     metrics: [
-      { label: "Embedding Dim", value: "4096-D" },
-      { label: "Batch Scale", value: "2.5M vectors" },
-      { label: "Precision Rate", value: "99.8% Recall" }
+      { label: "Community Shaders", value: "18,000+" },
+      { label: "Export Speed", value: "Instant" },
+      { label: "Satisfaction", value: "98%" }
     ],
     githubUrl: "https://github.com",
     liveUrl: "https://example.com"
@@ -130,72 +171,70 @@ export const PROJECTS_DATA: ProjectItem[] = [
 export const TIMELINE_DATA: TimelineItem[] = [
   {
     id: "exp-1",
-    period: "2024 - PRESENT",
+    period: "2024 - Present",
     role: "Lead Machine Learning Architect",
-    organization: "NEURAL DYNAMICS LABS",
+    organization: "Neural Dynamics Labs",
     location: "San Francisco, CA",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nunc eros. Proin vel convallis neque, a elementum sapien. Vivamus a magna nec lorem efficitur vehicula.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Leading full-stack architecture for enterprise generative AI workflows, scaling platform infrastructure from inception to hundreds of thousands of users.",
     type: "experience",
     highlights: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
-      "Mauris luctus felis eu velit viverra, id dapibus eros lacinia.",
-      "Curabitur dictum odio vel ante accumsan dictum."
+      "Architected distributed agent workflows reducing model execution latency by 35%.",
+      "Mentored a team of 8 frontend and machine learning engineers across two time zones.",
+      "Collaborated with product leadership to ship the flagship generative canvas."
     ]
   },
   {
     id: "exp-2",
     period: "2022 - 2024",
-    role: "Senior Distributed Systems Engineer",
-    organization: "QUANTUM COMPUTING INITIATIVE",
+    role: "Senior Full-Stack & Graphics Engineer",
+    organization: "Quantum Computing Initiative",
     location: "Boston, MA",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Vivamus vitae felis pellentesque, luctus eros non, congue turpis.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Built interactive WebGL simulation dashboards and distributed client-server applications for scientific computing teams.",
     type: "experience",
     highlights: [
-      "Quisque bibendum leo eu urna molestie tempus.",
-      "Nullam a nisl at elit accumsan aliquet non a nisi.",
-      "Donec porta augue eu ante elementum porttitor."
+      "Engineered real-time 3D simulation tools utilized daily by academic partners.",
+      "Spearheaded transition to TypeScript and modern micro-frontend architecture.",
+      "Reduced build and bundle deployment times by over 40%."
     ]
   },
   {
     id: "exp-3",
     period: "2020 - 2022",
-    role: "AI Research Engineer",
-    organization: "SYNAPSE COMPUTATIONAL LAB",
+    role: "Software Engineer",
+    organization: "Synapse Computational Lab",
     location: "Austin, TX",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Designed frontend user interfaces and RESTful backend APIs for data visualization and client analytics.",
     type: "experience",
     highlights: [
-      "In hac habitasse platea dictumst vestibulum rhoncus.",
-      "Pellentesque habitant morbi tristique senectus.",
-      "Aenean auctor wisi et urna aliquam erat volutpat."
+      "Developed high-throughput data tables and interactive chart components.",
+      "Authored extensive documentation and component design guidelines."
     ]
   },
   {
     id: "edu-1",
     period: "2018 - 2020",
     role: "Master of Science in Computer Science & AI",
-    organization: "INSTITUTE OF ADVANCED TECHNOLOGY",
+    organization: "Institute of Advanced Technology",
     location: "Cambridge, MA",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Thesis focused on high-dimensional vector representations and sparse neural network topologies.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Graduate studies in machine learning, distributed computing systems, and human-computer interaction.",
     type: "education",
     highlights: [
-      "Graduated with Highest Distinction Honors.",
-      "Published two papers on Tensor Decomposition in NeurIPS workshops.",
-      "Department Fellowship for Distributed Systems Research."
+      "Graduated with Highest Academic Distinction.",
+      "Graduate Research Assistant in Interactive Graphics and Computer Vision.",
+      "Published research in premier academic symposiums."
     ]
   },
   {
     id: "edu-2",
     period: "2014 - 2018",
-    role: "Bachelor of Science in Mathematics & Computing",
-    organization: "STATE POLYTECHNIC UNIVERSITY",
+    role: "Bachelor of Science in Computer Science & Mathematics",
+    organization: "State Polytechnic University",
     location: "Atlanta, GA",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dual concentration in Linear Algebra, Numerical Optimization, and Parallel Programming.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Core focus in algorithms, linear algebra, software engineering, and web development.",
     type: "education",
     highlights: [
       "Summa Cum Laude Honors.",
-      "President of High-Performance Computing Society.",
-      "Undergraduate Research Excellence Award."
+      "President of Student Software Development Organization."
     ]
   }
 ];
@@ -203,34 +242,34 @@ export const TIMELINE_DATA: TimelineItem[] = [
 export const ACHIEVEMENTS_DATA: AchievementItem[] = [
   {
     id: "ach-1",
-    title: "Global AI Engineering Fellowship",
-    organization: "International Artificial Intelligence Consortium",
+    title: "Outstanding Engineering Leadership",
+    organization: "Tech Innovation Guild",
     year: "2024",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus neque id cursus faucibus.",
-    badge: "FELLOW // TIER 1"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Awarded for driving high-impact technical initiatives and open engineering culture.",
+    badge: "Leadership Award"
   },
   {
     id: "ach-2",
-    title: "Excellence in Distributed Architecture",
-    organization: "Systems Scalability Summit",
+    title: "Best Web Application Design",
+    organization: "Design & Developer Awards",
     year: "2023",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero cursus.",
-    badge: "GOLD RECOGNITION"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Recognized for creative execution, WebGL interactions, and accessibility standards.",
+    badge: "First Place"
   },
   {
     id: "ach-3",
-    title: "Best Open Source Infrastructure Project",
-    organization: "Open Compute & Cloud Foundation",
+    title: "Open Source Creator Grant",
+    organization: "Open Software Foundation",
     year: "2022",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi nulla quis sem at nibh elementum.",
-    badge: "INNOVATION PRIZE"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Funded grant for community contributions to 3D web tooling and developer ergonomics.",
+    badge: "Grant Recipient"
   },
   {
     id: "ach-4",
-    title: "First Place: Autonomous Agent Grand Prix",
-    organization: "Robotics & Multi-Agent Conference",
+    title: "Global Hackathon Winner",
+    organization: "Autonomous Software Summit",
     year: "2021",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis ipsum praesent mauris.",
-    badge: "CHAMPION"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Built an automated collaborative workflow tool within a 48-hour challenge.",
+    badge: "Champion"
   }
 ];
