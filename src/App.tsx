@@ -1,88 +1,125 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, Sparkles } from 'lucide-react';
+import { ChevronDown, Sliders } from 'lucide-react';
 import { PortfolioV1 } from './components/PortfolioV1';
 import { PortfolioV2 } from './components/PortfolioV2';
+import { PortfolioV3 } from './components/PortfolioV3';
+
+type PortfolioVersion = 'v1' | 'v2' | 'v3';
 
 export const App: React.FC = () => {
-  // Store sample preference in local state with localStorage fallback
-  const [activeSample, setActiveSample] = useState<'sample-1' | 'sample-2'>(() => {
-    const saved = localStorage.getItem('portfolio_sample_preference');
-    return saved === 'sample-2' ? 'sample-2' : 'sample-1';
+  // Store version preference with localStorage persistence
+  const [activeVersion, setActiveVersion] = useState<PortfolioVersion>(() => {
+    const saved = localStorage.getItem('portfolio_version_preference');
+    if (saved === 'v2' || saved === 'v3' || saved === 'v1') {
+      return saved as PortfolioVersion;
+    }
+    // Backward compatibility for previously saved 'sample-2'
+    const legacy = localStorage.getItem('portfolio_sample_preference');
+    if (legacy === 'sample-2') return 'v2';
+    return 'v1';
   });
 
-  const handleSelectSample = (sample: 'sample-1' | 'sample-2') => {
-    setActiveSample(sample);
-    localStorage.setItem('portfolio_sample_preference', sample);
+  const handleVersionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newVersion = e.target.value as PortfolioVersion;
+    setActiveVersion(newVersion);
+    localStorage.setItem('portfolio_version_preference', newVersion);
   };
 
   useEffect(() => {
-    // Update document title dynamically based on active sample
-    if (activeSample === 'sample-2') {
-      document.title = 'Alexander Vance // Aubergine & Gold Art Gallery (Sample 2)';
-    } else {
-      document.title = 'Alexander Vance // Obsidian & Cyan Systems (Sample 1)';
+    switch (activeVersion) {
+      case 'v1':
+        document.title = 'Alexander Vance // Cyber Blue Architecture (Version 1)';
+        break;
+      case 'v2':
+        document.title = 'Alexander Vance // Aubergine & Antique Gold (Version 2)';
+        break;
+      case 'v3':
+        document.title = 'Khagesh // Neon Violet AI Dashboard (Version 3)';
+        break;
     }
-  }, [activeSample]);
+  }, [activeVersion]);
+
+  // Version theme styling for the dropdown container
+  const getDropdownThemeClass = () => {
+    switch (activeVersion) {
+      case 'v1':
+        return 'border-cyan-500/40 shadow-[0_0_20px_rgba(0,242,254,0.25)] text-cyan-300';
+      case 'v2':
+        return 'border-[#d4af37]/45 shadow-[0_0_20px_rgba(212,175,55,0.25)] text-[#eed98d] font-serif';
+      case 'v3':
+        return 'border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.3)] text-purple-300 font-mono';
+    }
+  };
 
   return (
     <div className="relative min-h-screen">
-      {/* Floating Sample Switcher Pill at Top of Screen */}
+      {/* Sleek Styled HTML Select Dropdown Menu in Top-Right Corner */}
       <div className="fixed top-4 right-4 sm:top-5 sm:right-6 z-[200] pointer-events-auto">
-        <div className="p-1 rounded-full bg-slate-950/90 border border-white/20 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center space-x-1">
-          {/* Sample 1 Switch */}
-          <button
-            onClick={() => handleSelectSample('sample-1')}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-mono transition-all duration-300 ${
-              activeSample === 'sample-1'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-bold shadow-[0_0_15px_rgba(0,242,254,0.4)]'
-                : 'text-slate-400 hover:text-white'
-            }`}
-            aria-label="Switch to Sample 1: Obsidian & Cyan"
-          >
-            <Layers className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Sample 1:</span>
-            <span>Obsidian</span>
-          </button>
+        <div
+          className={`group relative flex items-center px-3 py-2 rounded-2xl bg-black/90 backdrop-blur-2xl border transition-all duration-300 ${getDropdownThemeClass()}`}
+        >
+          {/* Leading Icon */}
+          <Sliders className="w-3.5 h-3.5 mr-2 shrink-0 opacity-80" />
 
-          {/* Sample 2 Switch */}
-          <button
-            onClick={() => handleSelectSample('sample-2')}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-serif transition-all duration-300 ${
-              activeSample === 'sample-2'
-                ? 'bg-gradient-to-r from-[#d4af37] via-[#e5c158] to-[#eed98d] text-[#07020d] font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-                : 'text-slate-400 hover:text-[#eed98d]'
-            }`}
-            aria-label="Switch to Sample 2: Aubergine & Gold"
+          {/* Styled HTML Select Dropdown */}
+          <select
+            value={activeVersion}
+            onChange={handleVersionChange}
+            className="bg-transparent text-xs font-semibold cursor-pointer outline-none appearance-none pr-7 text-inherit"
+            aria-label="Select Portfolio Version"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Sample 2:</span>
-            <span>Aubergine</span>
-          </button>
+            <option value="v1" className="bg-[#030712] text-slate-100 font-mono">
+              Version 1: Cyber Blue
+            </option>
+            <option value="v2" className="bg-[#0e051a] text-[#eed98d] font-serif">
+              Version 2: Aubergine Gold
+            </option>
+            <option value="v3" className="bg-black text-purple-300 font-mono">
+              Version 3: Neon Violet
+            </option>
+          </select>
+
+          {/* Trailing Chevron Icon */}
+          <ChevronDown className="w-3.5 h-3.5 absolute right-3 pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity" />
         </div>
       </div>
 
-      {/* Render Active Portfolio with Smooth Transition */}
+      {/* Render Selected Portfolio Version with Seamless Transition */}
       <AnimatePresence mode="wait">
-        {activeSample === 'sample-1' ? (
+        {activeVersion === 'v1' && (
           <motion.div
-            key="sample-1"
+            key="version-1"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.3 }}
           >
             <PortfolioV1 />
           </motion.div>
-        ) : (
+        )}
+
+        {activeVersion === 'v2' && (
           <motion.div
-            key="sample-2"
+            key="version-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.3 }}
           >
             <PortfolioV2 />
+          </motion.div>
+        )}
+
+        {activeVersion === 'v3' && (
+          <motion.div
+            key="version-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <PortfolioV3 />
           </motion.div>
         )}
       </AnimatePresence>
