@@ -10,9 +10,10 @@ export const HeroSectionV2: React.FC = () => {
       {/* 3D Gold Monolith Canvas Scene in Background */}
       <MonolithHeroCanvas />
 
-      {/* Royal aubergine & antique gold ambient illumination */}
-      <div className="absolute top-1/4 right-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/8 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#38165e]/20 rounded-full blur-[160px] pointer-events-none" />
+      {/* Royal aubergine & antique gold ambient illumination with lightened central spotlight */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-[radial-gradient(circle_at_center,rgba(126,34,206,0.3)_0%,rgba(88,28,135,0.22)_40%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/15 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#581c87]/30 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Foreground Container: Editorial Layout with Headshot on LEFT, Typography on RIGHT */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">

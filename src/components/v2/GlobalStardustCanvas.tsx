@@ -95,12 +95,13 @@ const Starfield = () => {
 export const GlobalStardustCanvas: React.FC = () => {
   return (
     <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-      {/* Background ambient aubergine gradient layers */}
+      {/* Background ambient aubergine gradient layers with lightened central radial depth */}
       <div className="absolute inset-0 bg-[#07020d]" />
-      <div className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-[#d4af37]/5 rounded-full blur-[180px]" />
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#38165e]/20 rounded-full blur-[180px]" />
-      <div className="absolute bottom-1/4 left-1/3 w-[700px] h-[700px] bg-[#d4af37]/6 rounded-full blur-[180px]" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#1f0d38]/30 rounded-full blur-[160px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(98,34,165,0.32)_0%,rgba(55,18,95,0.2)_40%,transparent_75%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-[#d4af37]/8 rounded-full blur-[180px]" />
+      <div className="absolute top-1/3 right-1/4 w-[650px] h-[650px] bg-[#581c87]/30 rounded-full blur-[180px]" />
+      <div className="absolute bottom-1/4 left-1/3 w-[700px] h-[700px] bg-[#d4af37]/8 rounded-full blur-[180px]" />
+      <div className="absolute bottom-10 right-10 w-[550px] h-[550px] bg-[#2e1065]/40 rounded-full blur-[160px]" />
 
       {/* Global Canvas */}
       <Canvas
