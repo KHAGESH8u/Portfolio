@@ -4,28 +4,56 @@ import { ArrowDown, Sparkles, Mail, Github, Linkedin, FileText, MapPin, CheckCir
 import { HeroCanvas } from '../3d/HeroCanvas';
 import { HERO_DATA } from '../../data/portfolioData';
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  isCanvasReady?: boolean;
+  isUiReady?: boolean;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  isCanvasReady = true,
+  isUiReady = true
+}) => {
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16">
       {/* 3D WebGL Canvas Scene in Background */}
-      <HeroCanvas />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isCanvasReady ? 1 : 0 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="absolute inset-0 w-full h-full"
+      >
+        <HeroCanvas />
+      </motion.div>
 
       {/* Radiant ambient glow spots */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Foreground Container: Split 2-Column Personal Hero */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* Foreground Container: Pointer events none allows full 3D mouse interaction */}
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{
+          opacity: isUiReady ? 1 : 0,
+          y: isUiReady ? 0 : 25
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 70,
+          damping: 18,
+          delay: 0.15
+        }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center pointer-events-none">
           
           {/* Left Column: Personal Narrative & Call to Action */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left pointer-events-none">
             {/* Status & Availability Badge */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 180, damping: 20 }}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 backdrop-blur-xl mb-6 shadow-[0_0_20px_rgba(0,242,254,0.15)]"
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 backdrop-blur-xl mb-6 shadow-[0_0_20px_rgba(0,242,254,0.15)] pointer-events-auto"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="font-mono text-xs text-cyan-300 font-medium">
@@ -38,6 +66,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 140, damping: 20, delay: 0.1 }}
+              className="pointer-events-none select-none"
             >
               <p className="text-sm font-mono text-cyan-400 uppercase tracking-widest mb-1">
                 {HERO_DATA.greeting}
@@ -54,7 +83,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 140, damping: 20, delay: 0.2 }}
-              className="mt-3"
+              className="mt-3 pointer-events-none select-none"
             >
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 {HERO_DATA.role}
@@ -69,13 +98,13 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 140, damping: 20, delay: 0.3 }}
-              className="mt-4"
+              className="mt-4 pointer-events-none"
             >
               <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 mb-3">
                 <MapPin className="w-4 h-4 text-cyan-400" />
                 <span>{HERO_DATA.location}</span>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed max-w-xl">
+              <p className="text-sm text-slate-400 leading-relaxed max-w-xl select-none">
                 {HERO_DATA.summary}
               </p>
             </motion.div>
@@ -85,11 +114,11 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 140, damping: 20, delay: 0.4 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-8 flex flex-wrap items-center gap-4 pointer-events-none"
             >
               <a
                 href="#projects"
-                className="group inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-mono text-xs font-bold tracking-wider text-black bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 transition-all duration-300 shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:scale-[1.02]"
+                className="group inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-mono text-xs font-bold tracking-wider text-black bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 transition-all duration-300 shadow-[0_0_25px_rgba(0,242,254,0.35)] hover:shadow-[0_0_35px_rgba(0,242,254,0.5)] hover:scale-[1.02] pointer-events-auto"
               >
                 <Sparkles className="w-4 h-4 text-black group-hover:rotate-12 transition-transform duration-300" />
                 <span>{HERO_DATA.ctaPrimary}</span>
@@ -97,19 +126,19 @@ export const HeroSection: React.FC = () => {
 
               <a
                 href="#contact"
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-mono text-xs font-semibold tracking-wider text-slate-200 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 hover:border-cyan-500/50 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02]"
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-mono text-xs font-semibold tracking-wider text-slate-200 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 hover:border-cyan-500/50 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] pointer-events-auto"
               >
                 <Mail className="w-4 h-4 text-cyan-400" />
                 <span>{HERO_DATA.ctaSecondary}</span>
               </a>
 
               {/* Icon links */}
-              <div className="flex items-center space-x-2 ml-1">
+              <div className="flex items-center space-x-2 ml-1 pointer-events-none">
                 <a
                   href="https://github.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all duration-200"
+                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all duration-200 pointer-events-auto"
                   aria-label="GitHub Profile"
                 >
                   <Github className="w-4 h-4" />
@@ -118,15 +147,15 @@ export const HeroSection: React.FC = () => {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-cyan-300 transition-all duration-200"
+                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-cyan-300 transition-all duration-200 pointer-events-auto"
                   aria-label="LinkedIn Profile"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
                 <a
                   href="#about"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-purple-300 transition-all duration-200"
-                  aria-label="Curriculum Vitae"
+                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-purple-300 transition-all duration-200 pointer-events-auto"
+                  aria-label="About Me & Resume"
                 >
                   <FileText className="w-4 h-4" />
                 </a>
@@ -134,21 +163,21 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Stylized Headshot & Personal Focus Box */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          {/* Right Column: Stylized Headshot Container */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end pointer-events-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.25 }}
-              className="relative w-72 sm:w-80 md:w-96"
+              className="relative w-72 sm:w-80 md:w-96 pointer-events-auto"
             >
               {/* Outer Radiant Glowing Ring */}
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-cyan-500/40 via-purple-600/30 to-blue-500/40 blur-xl opacity-75 animate-pulse" />
+              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-cyan-500/40 via-purple-600/30 to-blue-500/40 blur-xl opacity-75 animate-pulse pointer-events-none" />
 
               {/* Card Container */}
               <div className="relative rounded-3xl bg-slate-950/80 backdrop-blur-2xl border border-white/15 p-3.5 shadow-2xl overflow-hidden">
                 {/* Specular highlight */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent pointer-events-none" />
 
                 {/* Portrait Image Frame */}
                 <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
@@ -159,10 +188,10 @@ export const HeroSection: React.FC = () => {
                     loading="eager"
                   />
                   {/* Subtle gradient vignette over photo */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent pointer-events-none" />
 
                   {/* Corner Accent Badge */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/10 flex items-center justify-between pointer-events-none">
                     <div>
                       <div className="text-xs font-bold text-white font-mono">
                         ALEXANDER VANCE
@@ -178,7 +207,7 @@ export const HeroSection: React.FC = () => {
                 </div>
 
                 {/* Floating Tech Pill Highlights */}
-                <div className="mt-3 flex items-center justify-between text-[11px] font-mono px-2 py-1 text-slate-400">
+                <div className="mt-3 flex items-center justify-between text-[11px] font-mono px-2 py-1 text-slate-400 pointer-events-none">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                     FULL-STACK & 3D
@@ -191,7 +220,7 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-                className="absolute -top-4 -left-4 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-500/40 backdrop-blur-xl text-xs font-mono text-cyan-300 shadow-xl hidden sm:flex items-center space-x-2"
+                className="absolute -top-4 -left-4 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-500/40 backdrop-blur-xl text-xs font-mono text-cyan-300 shadow-xl hidden sm:flex items-center space-x-2 pointer-events-none"
               >
                 <span className="w-2 h-2 rounded-full bg-cyan-400" />
                 <span>AI & LLM SYSTEMS</span>
@@ -201,7 +230,7 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 -right-4 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-purple-500/40 backdrop-blur-xl text-xs font-mono text-purple-300 shadow-xl hidden sm:flex items-center space-x-2"
+                className="absolute -bottom-4 -right-4 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-purple-500/40 backdrop-blur-xl text-xs font-mono text-purple-300 shadow-xl hidden sm:flex items-center space-x-2 pointer-events-none"
               >
                 <span className="w-2 h-2 rounded-full bg-purple-400" />
                 <span>REACT & THREE.JS</span>
@@ -212,12 +241,12 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Scroll down indicator */}
-        <div className="mt-16 flex justify-center">
+        <div className="mt-16 flex justify-center pointer-events-none">
           <motion.a
             href="#about"
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            className="flex flex-col items-center text-slate-500 hover:text-cyan-400 transition-colors"
+            className="flex flex-col items-center text-slate-500 hover:text-cyan-400 transition-colors pointer-events-auto"
             aria-label="Scroll to About Me section"
           >
             <span className="text-[11px] font-mono tracking-widest uppercase mb-1">
@@ -226,7 +255,7 @@ export const HeroSection: React.FC = () => {
             <ArrowDown className="w-4 h-4" />
           </motion.a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

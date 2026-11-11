@@ -25,13 +25,13 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 pointer-events-none ${
         scrolled ? 'py-3' : 'py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
         <div
-          className={`relative flex items-center justify-between px-5 py-3 rounded-2xl transition-all duration-300 ${
+          className={`relative flex items-center justify-between px-5 py-3 rounded-2xl transition-all duration-300 pointer-events-auto ${
             scrolled
               ? 'bg-slate-950/85 backdrop-blur-2xl border border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.5)]'
               : 'bg-transparent border border-transparent'
@@ -101,7 +101,7 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden px-4 pt-2"
+            className="md:hidden px-4 pt-2 pointer-events-auto"
           >
             <div className="rounded-2xl bg-slate-950/95 backdrop-blur-2xl border border-white/10 p-5 space-y-3 shadow-2xl">
               {navLinks.map((link) => (
