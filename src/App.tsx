@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from './components/sections/Navbar';
 import { HeroSection } from './components/sections/HeroSection';
+import { AboutSection } from './components/sections/AboutSection';
 import { BentoMatrix } from './components/sections/BentoMatrix';
 import { ProjectsSection } from './components/sections/ProjectsSection';
 import { ExperienceTimeline } from './components/sections/ExperienceTimeline';
@@ -14,27 +15,30 @@ export const App: React.FC = () => {
       {/* Background ambient subtle grid overlay */}
       <div className="fixed inset-0 bg-grid-pattern opacity-100 pointer-events-none z-0" />
 
-      {/* Floating Navigation Header */}
+      {/* Floating Glass Navigation Header */}
       <Navbar />
 
-      {/* Main Single-Page Smooth Scroll Flow */}
+      {/* Main Single-Page Flow */}
       <main className="relative z-10 flex flex-col">
-        {/* 1. Hero Section (100vh WebGL R3F interactive scene) */}
+        {/* 1. Humanized Hero Section with Personal Headshot & 3D WebGL Canvas */}
         <HeroSection />
 
-        {/* 2. Bento Box Skills Matrix */}
+        {/* 2. About Me Section (2-Paragraph Personal Narrative & Quick Stats) */}
+        <AboutSection />
+
+        {/* 3. Skills & Technologies Bento Tag Cloud */}
         <BentoMatrix />
 
-        {/* 3. Projects Showcase (4 Large 3D Tilt Cards) */}
+        {/* 4. Projects Showcase (Laptop & Browser Mockup Cards) */}
         <ProjectsSection />
 
-        {/* 4. Experience & Education Glowing Timeline */}
+        {/* 5. Career & Education Timeline */}
         <ExperienceTimeline />
 
-        {/* 5. Holographic Achievements & Accolades */}
+        {/* 6. Honors & Accolades */}
         <AchievementsSection />
 
-        {/* 6. Minimalist Grid-Aligned Contact Form */}
+        {/* 7. Conversational Contact Module ("Get in Touch") */}
         <ContactSection />
       </main>
 
