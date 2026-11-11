@@ -6,20 +6,74 @@ import { HERO_DATA } from '../../data/portfolioData';
 
 export const HeroSectionV2: React.FC = () => {
   return (
-    <section id="hero-v2" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20 bg-[#07020d]">
+    <section id="hero-v2" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
       {/* 3D Gold Monolith Canvas Scene in Background */}
       <MonolithHeroCanvas />
 
       {/* Royal aubergine & antique gold ambient illumination */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/8 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#38165e]/25 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#d4af37]/8 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#38165e]/20 rounded-full blur-[160px] pointer-events-none" />
 
-      {/* Foreground Container: Editorial Asymmetrical Layout */}
+      {/* Foreground Container: Editorial Layout with Headshot on LEFT, Typography on RIGHT */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center pointer-events-none">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center pointer-events-none">
           
-          {/* Left Column: Haute-Couture Personal Typography */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left pointer-events-none">
+          {/* Left Column (lg:col-span-5): High-Fashion Luxury Headshot Container */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.15 }}
+              className="relative w-72 sm:w-84 md:w-96 pointer-events-auto"
+            >
+              {/* Outer Antique Gold Ambient Halo */}
+              <div className="absolute -inset-3 rounded-[32px] bg-gradient-to-tr from-[#d4af37]/30 via-[#38165e]/40 to-[#e5c158]/30 blur-2xl opacity-70 pointer-events-none" />
+
+              {/* Frame Container */}
+              <div className="relative rounded-[28px] bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/30 p-4 shadow-[0_20px_60px_rgba(7,2,13,0.9)]">
+                {/* Gold specular highlight edge */}
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#eed98d] to-transparent pointer-events-none" />
+
+                {/* Portrait container */}
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#d4af37]/20">
+                  <img
+                    src={HERO_DATA.avatarUrl}
+                    alt={HERO_DATA.name}
+                    className="w-full h-full object-cover object-center filter sepia-[20%] contrast-[110%] hover:sepia-0 transition-all duration-700"
+                    loading="eager"
+                  />
+                  {/* Subtle warm aubergine vignette overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e051a] via-transparent to-transparent pointer-events-none" />
+
+                  {/* Museum Placard Style Caption */}
+                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#07020d]/85 backdrop-blur-md border border-[#d4af37]/25 pointer-events-none">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-xs font-serif font-bold text-[#eed98d] tracking-wider">
+                          ALEXANDER VANCE
+                        </div>
+                        <div className="text-[10px] font-mono text-[#d4af37]/80 tracking-widest mt-0.5">
+                          PRINCIPAL ARCHITECT
+                        </div>
+                      </div>
+                      <div className="text-[10px] font-serif px-2 py-0.5 rounded border border-[#d4af37]/40 text-[#e5c158]">
+                        NO. 01
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom luxury insignia */}
+                <div className="mt-3 flex items-center justify-between text-[10px] font-serif text-[#d4af37]/75 px-2">
+                  <span>METICULOUS PARADIGMS</span>
+                  <span>AUTONOMOUS SYSTEMS</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column (lg:col-span-7): Haute-Couture Personal Typography */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left pointer-events-none pl-0 lg:pl-4">
             
             {/* Archival Badge */}
             <motion.div
@@ -128,60 +182,6 @@ export const HeroSectionV2: React.FC = () => {
                 >
                   <FileText className="w-4 h-4" />
                 </a>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column: High-Fashion Luxury Headshot Container */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.25 }}
-              className="relative w-72 sm:w-84 md:w-96 pointer-events-auto"
-            >
-              {/* Outer Antique Gold Ambient Halo */}
-              <div className="absolute -inset-3 rounded-[32px] bg-gradient-to-tr from-[#d4af37]/30 via-[#38165e]/40 to-[#e5c158]/30 blur-2xl opacity-70 pointer-events-none" />
-
-              {/* Frame Container */}
-              <div className="relative rounded-[28px] bg-[#0e051a]/85 backdrop-blur-3xl border border-[#d4af37]/30 p-4 shadow-[0_20px_60px_rgba(7,2,13,0.9)]">
-                {/* Gold specular highlight edge */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#eed98d] to-transparent pointer-events-none" />
-
-                {/* Portrait container */}
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#d4af37]/20">
-                  <img
-                    src={HERO_DATA.avatarUrl}
-                    alt={HERO_DATA.name}
-                    className="w-full h-full object-cover object-center filter sepia-[20%] contrast-[110%] hover:sepia-0 transition-all duration-700"
-                    loading="eager"
-                  />
-                  {/* Subtle warm aubergine vignette overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e051a] via-transparent to-transparent pointer-events-none" />
-
-                  {/* Museum Placard Style Caption */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#07020d]/85 backdrop-blur-md border border-[#d4af37]/25 pointer-events-none">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-xs font-serif font-bold text-[#eed98d] tracking-wider">
-                          ALEXANDER VANCE
-                        </div>
-                        <div className="text-[10px] font-mono text-[#d4af37]/80 tracking-widest mt-0.5">
-                          PRINCIPAL ARCHITECT
-                        </div>
-                      </div>
-                      <div className="text-[10px] font-serif px-2 py-0.5 rounded border border-[#d4af37]/40 text-[#e5c158]">
-                        NO. 01
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom luxury insignia */}
-                <div className="mt-3 flex items-center justify-between text-[10px] font-serif text-[#d4af37]/75 px-2">
-                  <span>METICULOUS PARADIGMS</span>
-                  <span>AUTONOMOUS SYSTEMS</span>
-                </div>
               </div>
             </motion.div>
           </div>
