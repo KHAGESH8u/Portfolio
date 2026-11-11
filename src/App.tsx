@@ -5,18 +5,19 @@ import { PortfolioV1 } from './components/PortfolioV1';
 import { PortfolioV2 } from './components/PortfolioV2';
 import { PortfolioV3 } from './components/PortfolioV3';
 import { PortfolioV4 } from './components/PortfolioV4';
+import { PortfolioV5 } from './components/PortfolioV5';
 
-type PortfolioVersion = 'v1' | 'v2' | 'v3' | 'v4';
+type PortfolioVersion = 'v1' | 'v2' | 'v3' | 'v4' | 'v5';
 
 export const App: React.FC = () => {
   // Store version preference with localStorage persistence
   const [activeVersion, setActiveVersion] = useState<PortfolioVersion>(() => {
     const saved = localStorage.getItem('portfolio_version_preference');
-    if (saved === 'v4' || saved === 'v3' || saved === 'v2' || saved === 'v1') {
+    if (saved === 'v5' || saved === 'v4' || saved === 'v3' || saved === 'v2' || saved === 'v1') {
       return saved as PortfolioVersion;
     }
-    // Default to v3 or v4
-    return 'v4';
+    // Default to v5
+    return 'v5';
   });
 
   const handleVersionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,6 +40,9 @@ export const App: React.FC = () => {
       case 'v4':
         document.title = 'Khagesh // Deep Teal & Porcelain White (Version 4)';
         break;
+      case 'v5':
+        document.title = 'Alexander Vance // Aubergine Neural (Version 5)';
+        break;
     }
   }, [activeVersion]);
 
@@ -53,6 +57,8 @@ export const App: React.FC = () => {
         return 'border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.3)] text-purple-300 font-mono';
       case 'v4':
         return 'border-teal-400/50 shadow-[0_0_20px_rgba(45,212,191,0.35)] text-teal-200 font-mono';
+      case 'v5':
+        return 'border-[#d4af37]/60 shadow-[0_0_25px_rgba(212,175,55,0.35)] text-[#eed98d] font-serif';
     }
   };
 
@@ -84,6 +90,9 @@ export const App: React.FC = () => {
             </option>
             <option value="v4" className="bg-[#011414] text-teal-200 font-mono">
               Version 4: Teal & Porcelain
+            </option>
+            <option value="v5" className="bg-[#0e051a] text-[#eed98d] font-serif">
+              Version 5: Aubergine Neural
             </option>
           </select>
 
@@ -139,6 +148,18 @@ export const App: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <PortfolioV4 />
+          </motion.div>
+        )}
+
+        {activeVersion === 'v5' && (
+          <motion.div
+            key="version-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <PortfolioV5 />
           </motion.div>
         )}
       </AnimatePresence>
