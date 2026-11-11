@@ -11,12 +11,12 @@ export const ProjectsSection: React.FC = () => {
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[150px] pointer-events-none" />
 
       <SectionHeader
-        badge="PRODUCTION ARTIFACTS"
-        title="FEATURED PROJECTS // 4 CORES"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. High-throughput distributed nodes, neural accelerators, and real-time visualization frameworks."
+        badge="PORTFOLIO & CASE STUDIES"
+        title="Featured Projects"
+        subtitle="A selection of enterprise applications, real-time AI platforms, and creative web tools I've engineered from concept to production."
       />
 
-      {/* Grid of exactly 4 large project cards */}
+      {/* Grid of exactly 4 large project cards with realistic laptop/browser mockups */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
         {PROJECTS_DATA.map((project, index) => (
           <TiltProjectCard
