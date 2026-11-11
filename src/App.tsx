@@ -4,20 +4,19 @@ import { ChevronDown, Sliders } from 'lucide-react';
 import { PortfolioV1 } from './components/PortfolioV1';
 import { PortfolioV2 } from './components/PortfolioV2';
 import { PortfolioV3 } from './components/PortfolioV3';
+import { PortfolioV4 } from './components/PortfolioV4';
 
-type PortfolioVersion = 'v1' | 'v2' | 'v3';
+type PortfolioVersion = 'v1' | 'v2' | 'v3' | 'v4';
 
 export const App: React.FC = () => {
   // Store version preference with localStorage persistence
   const [activeVersion, setActiveVersion] = useState<PortfolioVersion>(() => {
     const saved = localStorage.getItem('portfolio_version_preference');
-    if (saved === 'v2' || saved === 'v3' || saved === 'v1') {
+    if (saved === 'v4' || saved === 'v3' || saved === 'v2' || saved === 'v1') {
       return saved as PortfolioVersion;
     }
-    // Backward compatibility for previously saved 'sample-2'
-    const legacy = localStorage.getItem('portfolio_sample_preference');
-    if (legacy === 'sample-2') return 'v2';
-    return 'v1';
+    // Default to v3 or v4
+    return 'v4';
   });
 
   const handleVersionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +34,10 @@ export const App: React.FC = () => {
         document.title = 'Alexander Vance // Aubergine & Antique Gold (Version 2)';
         break;
       case 'v3':
-        document.title = 'Khagesh // Neon Violet AI Dashboard (Version 3)';
+        document.title = 'Khagesh // Neon Violet AI Architecture (Version 3)';
+        break;
+      case 'v4':
+        document.title = 'Khagesh // Deep Teal & Porcelain White (Version 4)';
         break;
     }
   }, [activeVersion]);
@@ -49,6 +51,8 @@ export const App: React.FC = () => {
         return 'border-[#d4af37]/45 shadow-[0_0_20px_rgba(212,175,55,0.25)] text-[#eed98d] font-serif';
       case 'v3':
         return 'border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.3)] text-purple-300 font-mono';
+      case 'v4':
+        return 'border-teal-400/50 shadow-[0_0_20px_rgba(45,212,191,0.35)] text-teal-200 font-mono';
     }
   };
 
@@ -77,6 +81,9 @@ export const App: React.FC = () => {
             </option>
             <option value="v3" className="bg-black text-purple-300 font-mono">
               Version 3: Neon Violet
+            </option>
+            <option value="v4" className="bg-[#011414] text-teal-200 font-mono">
+              Version 4: Teal & Porcelain
             </option>
           </select>
 
@@ -120,6 +127,18 @@ export const App: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <PortfolioV3 />
+          </motion.div>
+        )}
+
+        {activeVersion === 'v4' && (
+          <motion.div
+            key="version-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <PortfolioV4 />
           </motion.div>
         )}
       </AnimatePresence>

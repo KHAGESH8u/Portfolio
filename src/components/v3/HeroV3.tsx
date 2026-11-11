@@ -6,7 +6,7 @@ export const HeroV3: React.FC = () => {
   return (
     <section
       id="hero-v3"
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20"
+      className="relative w-full min-h-screen snap-start flex items-center justify-center overflow-hidden py-16 pointer-events-none"
     >
       {/* Piercing Neon Violet Glow Centerpiece */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-purple-600/15 rounded-full blur-[170px] pointer-events-none" />
@@ -33,7 +33,7 @@ export const HeroV3: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-          className="text-6xl sm:text-8xl md:text-9xl font-black font-sans tracking-tighter text-white select-none leading-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]"
+          className="text-6xl sm:text-8xl md:text-9xl font-black font-sans tracking-tighter text-white select-none leading-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] pointer-events-none"
         >
           <span className="bg-gradient-to-b from-white via-gray-100 to-purple-300 bg-clip-text text-transparent">
             Khagesh
@@ -45,7 +45,7 @@ export const HeroV3: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
-          className="mt-6 sm:mt-8 max-w-3xl"
+          className="mt-6 sm:mt-8 max-w-3xl pointer-events-none"
         >
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold font-sans tracking-tight leading-tight">
             <span className="bg-gradient-to-r from-purple-300 via-fuchsia-300 to-purple-200 bg-clip-text text-transparent">
@@ -119,7 +119,7 @@ export const HeroV3: React.FC = () => {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-          className="mt-20 pointer-events-auto"
+          className="mt-16 pointer-events-auto"
         >
           <a
             href="#about-v3"

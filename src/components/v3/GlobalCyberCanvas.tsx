@@ -2,34 +2,56 @@ import React, { useRef, useMemo, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-// 1. Dynamic Undulating Wireframe Cyber Terrain / Data Lattice
-const WireframeGrid = () => {
+// Global mouse coordinates store for smooth non-blocking interaction
+const mouseState = {
+  x: 0,
+  y: 0,
+  targetX: 0,
+  targetY: 0
+};
+
+if (typeof window !== 'undefined') {
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      mouseState.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseState.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    },
+    { passive: true }
+  );
+}
+
+// 1. Abstract Fluid Topographic Cyber Wave
+const AbstractFluidTerrain = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const geomRef = useRef<THREE.PlaneGeometry>(null);
 
-  const gridSize = 48;
-  const segments = 40;
+  const gridSize = 50;
+  const segments = 46;
 
-  // Precomputed base vertex elevations
-  const initialZ = useMemo(() => {
+  const baseZ = useMemo(() => {
     const arr = new Float32Array((segments + 1) * (segments + 1));
     for (let i = 0; i < arr.length; i++) {
       const x = (i % (segments + 1)) - segments / 2;
       const y = Math.floor(i / (segments + 1)) - segments / 2;
-      arr[i] = Math.sin(x * 0.25) * Math.cos(y * 0.25) * 1.4;
+      arr[i] = Math.sin(x * 0.22) * Math.cos(y * 0.22) * 1.6;
     }
     return arr;
   }, [segments]);
 
   useFrame((state) => {
+    // Smooth mouse lerping
+    mouseState.x = THREE.MathUtils.lerp(mouseState.x, mouseState.targetX, 0.08);
+    mouseState.y = THREE.MathUtils.lerp(mouseState.y, mouseState.targetY, 0.08);
+
     const t = state.clock.getElapsedTime();
-    const mouseX = state.pointer.x * 4;
-    const mouseY = state.pointer.y * 4;
+    const mx = mouseState.x * 6;
+    const my = mouseState.y * 6;
 
     if (meshRef.current) {
-      // Perspective pitch and slight mouse lean
-      meshRef.current.rotation.x = -Math.PI / 2.6 + state.pointer.y * 0.08;
-      meshRef.current.rotation.z = Math.sin(t * 0.1) * 0.05 + state.pointer.x * 0.05;
+      meshRef.current.rotation.x = -Math.PI / 2.7 + mouseState.y * 0.12;
+      meshRef.current.rotation.z = Math.sin(t * 0.1) * 0.06 + mouseState.x * 0.08;
+      meshRef.current.position.y = -2.6 + mouseState.y * 0.2;
     }
 
     if (geomRef.current) {
@@ -40,108 +62,112 @@ const WireframeGrid = () => {
         const x = posAttr.getX(i);
         const y = posAttr.getY(i);
 
-        const dx = x - mouseX;
-        const dy = y - mouseY;
+        const dx = x - mx;
+        const dy = y - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // Fluid cyber wave ripple
-        let ripple = Math.sin(t * 1.8 + (x + y) * 0.3) * 0.45;
-        if (dist < 6.0) {
-          ripple += (6.0 - dist) * 0.25;
+        // Fluid undulating abstract wave
+        let wave = Math.sin(t * 1.6 + (x * 0.28 + y * 0.28)) * 0.55;
+        wave += Math.cos(t * 1.2 + x * 0.35) * 0.3;
+
+        // Dynamic cursor repulsion
+        if (dist < 7.5) {
+          wave += (7.5 - dist) * 0.32;
         }
 
-        const base = initialZ[i] || 0;
-        posAttr.setZ(i, base + ripple);
+        const b = baseZ[i] || 0;
+        posAttr.setZ(i, b + wave);
       }
       posAttr.needsUpdate = true;
     }
   });
 
   return (
-    <mesh ref={meshRef} position={[0, -2.8, -2]}>
+    <mesh ref={meshRef} position={[0, -2.6, -1]}>
       <planeGeometry
         ref={geomRef}
         args={[gridSize, gridSize, segments, segments]}
       />
       <meshStandardMaterial
         color="#a855f7"
-        emissive="#7e22ce"
-        emissiveIntensity={0.8}
+        emissive="#581c87"
+        emissiveIntensity={0.85}
         wireframe
         transparent
-        opacity={0.55}
+        opacity={0.65}
       />
     </mesh>
   );
 };
 
-// 2. Floating Cyber Network Nodes & Interconnecting Lines
-const NetworkNodes = () => {
+// 2. Abstract Floating Neon Violet Polyhedral Monoliths
+const AbstractFloatingGeometry = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const nodeCount = 65;
+  const count = 16;
 
-  const [nodes, linesGeometry] = useMemo(() => {
-    const pts: THREE.Vector3[] = [];
-    for (let i = 0; i < nodeCount; i++) {
-      pts.push(
-        new THREE.Vector3(
-          (Math.random() - 0.5) * 24,
-          (Math.random() - 0.5) * 16,
-          (Math.random() - 0.5) * 14
-        )
-      );
-    }
-
-    // Connect proximate nodes with line segments
-    const linePositions: number[] = [];
-    const maxDist = 5.2;
-
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const d = pts[i].distanceTo(pts[j]);
-        if (d < maxDist) {
-          linePositions.push(pts[i].x, pts[i].y, pts[i].z);
-          linePositions.push(pts[j].x, pts[j].y, pts[j].z);
-        }
-      }
-    }
-
-    const geom = new THREE.BufferGeometry();
-    geom.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(linePositions, 3)
-    );
-
-    return [pts, geom];
-  }, [nodeCount]);
+  const items = useMemo(() => {
+    return Array.from({ length: count }, (_, i) => ({
+      position: [
+        (Math.random() - 0.5) * 22,
+        (Math.random() - 0.5) * 14 + 1,
+        (Math.random() - 0.5) * 10 - 2
+      ] as [number, number, number],
+      scale: 0.35 + Math.random() * 0.45,
+      rotSpeed: [
+        (Math.random() - 0.5) * 0.6,
+        (Math.random() - 0.5) * 0.8,
+        (Math.random() - 0.5) * 0.5
+      ],
+      isOcta: i % 2 === 0
+    }));
+  }, [count]);
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.02;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.08;
+      // Fluid orbital drift reacting to cursor
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        mouseState.x * 0.25,
+        0.05
+      );
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        -mouseState.y * 0.18,
+        0.05
+      );
+
+      // Rotate individual children
+      groupRef.current.children.forEach((child, idx) => {
+        const item = items[idx];
+        if (item) {
+          child.rotation.x += delta * item.rotSpeed[0];
+          child.rotation.y += delta * item.rotSpeed[1];
+          child.rotation.z += delta * item.rotSpeed[2];
+          // Gentle floating bob
+          child.position.y += Math.sin(state.clock.elapsedTime * 1.5 + idx) * 0.003;
+        }
+      });
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Network Lines */}
-      <lineSegments geometry={linesGeometry}>
-        <lineBasicMaterial
-          color="#c084fc"
-          transparent
-          opacity={0.3}
-          blending={THREE.AdditiveBlending}
-        />
-      </lineSegments>
-
-      {/* Node Spheres */}
-      {nodes.map((pos, idx) => (
-        <mesh key={idx} position={pos}>
-          <sphereGeometry args={[0.07, 8, 8]} />
-          <meshBasicMaterial
-            color={idx % 2 === 0 ? '#d946ef' : '#a855f7'}
+      {items.map((item, idx) => (
+        <mesh key={idx} position={item.position} scale={item.scale}>
+          {item.isOcta ? (
+            <octahedronGeometry args={[1, 0]} />
+          ) : (
+            <dodecahedronGeometry args={[1, 0]} />
+          )}
+          <meshStandardMaterial
+            color="#c084fc"
+            emissive="#7e22ce"
+            emissiveIntensity={0.65}
+            metalness={0.9}
+            roughness={0.15}
+            wireframe={idx % 3 === 0}
             transparent
-            opacity={0.85}
+            opacity={0.7}
           />
         </mesh>
       ))}
@@ -149,11 +175,11 @@ const NetworkNodes = () => {
   );
 };
 
-// 3. Ambient Stardust Field with Scroll Parallax
-const StardustField = () => {
+// 3. Cyber Stardust Field with Vertical Parallax
+const AbstractStardust = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const scrollYRef = useRef(0);
-  const starCount = 500;
+  const count = 550;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -164,42 +190,38 @@ const StardustField = () => {
   }, []);
 
   const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(starCount * 3);
-    const cols = new Float32Array(starCount * 3);
+    const pos = new Float32Array(count * 3);
+    const cols = new Float32Array(count * 3);
 
     const violet = new THREE.Color('#c084fc');
-    const fuchsia = new THREE.Color('#e879f9');
+    const fuchsia = new THREE.Color('#d946ef');
     const deepNeon = new THREE.Color('#a855f7');
-    const tempCol = new THREE.Color();
+    const temp = new THREE.Color();
 
-    for (let i = 0; i < starCount; i++) {
+    for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 32;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 32;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 28;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 18;
 
       const r = Math.random();
-      if (r < 0.45) {
-        tempCol.copy(violet);
-      } else if (r < 0.75) {
-        tempCol.copy(fuchsia);
-      } else {
-        tempCol.copy(deepNeon);
-      }
+      if (r < 0.4) temp.copy(violet);
+      else if (r < 0.75) temp.copy(fuchsia);
+      else temp.copy(deepNeon);
 
-      cols[i * 3] = tempCol.r;
-      cols[i * 3 + 1] = tempCol.g;
-      cols[i * 3 + 2] = tempCol.b;
+      cols[i * 3] = temp.r;
+      cols[i * 3 + 1] = temp.g;
+      cols[i * 3 + 2] = temp.b;
     }
 
     return [pos, cols];
-  }, [starCount]);
+  }, [count]);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y -= delta * 0.012;
+      pointsRef.current.rotation.y -= delta * 0.015;
       pointsRef.current.rotation.x += delta * 0.008;
 
-      // Vertical parallax tied to scroll
+      // Vertical parallax
       const targetY = scrollYRef.current * 0.001;
       pointsRef.current.position.y = THREE.MathUtils.lerp(
         pointsRef.current.position.y,
@@ -207,8 +229,8 @@ const StardustField = () => {
         0.05
       );
 
-      // Subtle mouse tracking
-      pointsRef.current.rotation.z = state.pointer.x * 0.04;
+      // Mouse lean
+      pointsRef.current.rotation.z = mouseState.x * 0.05;
     }
   });
 
@@ -219,10 +241,10 @@ const StardustField = () => {
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.065}
+        size={0.07}
         vertexColors
         transparent
-        opacity={0.65}
+        opacity={0.7}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
@@ -235,9 +257,9 @@ export const GlobalCyberCanvas: React.FC = () => {
     <div className="fixed inset-0 z-[-1] w-full h-full pointer-events-none overflow-hidden select-none">
       {/* Deep Void with Layered Neon Violet Atmospheric Radial Glows */}
       <div className="absolute inset-0 bg-[#030108]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_25%,rgba(168,85,247,0.22)_0%,rgba(88,28,135,0.14)_45%,transparent_75%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(217,70,239,0.12)_0%,transparent_60%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_60%,rgba(147,51,234,0.14)_0%,transparent_55%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_25%,rgba(168,85,247,0.25)_0%,rgba(88,28,135,0.16)_45%,transparent_75%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_75%,rgba(217,70,239,0.14)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_65%,rgba(147,51,234,0.16)_0%,transparent_55%)] pointer-events-none" />
 
       {/* High-Performance 3D WebGL Canvas */}
       <Canvas
@@ -250,23 +272,23 @@ export const GlobalCyberCanvas: React.FC = () => {
         dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} color="#4c1d95" />
-          <pointLight position={[6, 6, 6]} intensity={3.0} color="#c084fc" />
-          <pointLight position={[-6, -4, 4]} intensity={2.5} color="#d946ef" />
-          <pointLight position={[0, 2, 7]} intensity={2.0} color="#a855f7" />
+          <ambientLight intensity={0.6} color="#3b0764" />
+          <pointLight position={[6, 6, 6]} intensity={3.5} color="#c084fc" />
+          <pointLight position={[-6, -4, 4]} intensity={2.8} color="#d946ef" />
+          <pointLight position={[0, 3, 7]} intensity={2.4} color="#a855f7" />
 
-          {/* Undulating Wireframe Cyber Terrain */}
-          <WireframeGrid />
+          {/* Abstract Fluid Topographic Mesh */}
+          <AbstractFluidTerrain />
 
-          {/* Interconnected Glowing Nodes & Lines */}
-          <NetworkNodes />
+          {/* Abstract Floating Neon Violet Polyhedra */}
+          <AbstractFloatingGeometry />
 
-          {/* Stardust Field with Parallax */}
-          <StardustField />
+          {/* Radiant Stardust Field */}
+          <AbstractStardust />
         </Suspense>
       </Canvas>
 
-      {/* Subtle top and bottom dark vignetting */}
+      {/* Top and bottom subtle dark vignetting */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none" />
     </div>
   );

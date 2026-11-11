@@ -11,7 +11,7 @@ import { FooterV3 } from './v3/FooterV3';
 
 export const PortfolioV3: React.FC = () => {
   return (
-    <div className="relative min-h-screen isolate bg-[#030108] text-gray-100 selection:bg-purple-500 selection:text-black font-sans overflow-x-hidden">
+    <div className="relative h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth isolate bg-[#030108] text-gray-100 selection:bg-purple-500 selection:text-black font-sans overflow-x-hidden">
       {/* 1. Viewport-Fixed Glowing Neon Violet 3D Network, Mesh & Particle Canvas */}
       <GlobalCyberCanvas />
 
@@ -21,8 +21,8 @@ export const PortfolioV3: React.FC = () => {
       {/* Floating Modern Header Navigation */}
       <NavbarV3 />
 
-      {/* Main Cinematic Scroll Architecture */}
-      <main className="relative z-10 flex flex-col">
+      {/* Main Cinematic Scroll Architecture with strict pointer-events pass-through */}
+      <main className="relative z-10 flex flex-col pointer-events-none">
         {/* 1. Hero Section (100vh): Centered Name "Khagesh" & Title */}
         <HeroV3 />
 
@@ -40,10 +40,10 @@ export const PortfolioV3: React.FC = () => {
 
         {/* 6. Cinematic Conclusion & Transmission */}
         <ContactV3 />
-      </main>
 
-      {/* Footer */}
-      <FooterV3 />
+        {/* Footer */}
+        <FooterV3 />
+      </main>
     </div>
   );
 };
