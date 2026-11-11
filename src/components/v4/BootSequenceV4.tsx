@@ -6,35 +6,36 @@ interface BootSequenceV4Props {
 }
 
 export const BootSequenceV4: React.FC<BootSequenceV4Props> = ({ onComplete }) => {
-  const [phase, setPhase] = useState<'dot' | 'branching' | 'flash' | 'dissolving'>('dot');
+  // Stages: 'expanding' (0-1.0s) -> 'holding' (1.0-2.4s, 1.4s frozen hold) -> 'dissolving' (2.4-2.8s)
+  const [stage, setStage] = useState<'expanding' | 'holding' | 'dissolving'>('expanding');
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const startTime = Date.now();
-    const duration = 2500; // 2.5 seconds total loading sequence
+    // Timing breakdown:
+    // 0 to 1000ms: Sharp angular branches trace and converge into the geometric 'K' tensor graph
+    // 1000 to 2400ms: Exactly 1.4 seconds of still, frozen hold for viewing
+    // 2400 to 2750ms: Complete and trigger onComplete callback
+    const totalDuration = 2700;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
-      const pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+      const pct = Math.min(100, Math.floor((elapsed / totalDuration) * 100));
       setProgress(pct);
 
-      if (pct < 28) {
-        setPhase('dot');
-      } else if (pct < 80) {
-        setPhase('branching');
-      } else if (pct < 94) {
-        setPhase('flash');
+      if (elapsed < 1000) {
+        setStage('expanding');
+      } else if (elapsed < 2400) {
+        setStage('holding');
       } else {
-        setPhase('dissolving');
+        setStage('dissolving');
       }
 
-      if (pct >= 100) {
+      if (elapsed >= totalDuration) {
         clearInterval(interval);
-        setTimeout(() => {
-          onComplete();
-        }, 180);
+        onComplete();
       }
-    }, 25);
+    }, 20);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -44,132 +45,179 @@ export const BootSequenceV4: React.FC<BootSequenceV4Props> = ({ onComplete }) =>
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        scale: 1.08,
+        scale: 1.05,
         filter: 'blur(12px)',
-        transition: { duration: 0.8, ease: 'easeOut' }
+        transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] }
       }}
       className="fixed inset-0 z-50 bg-[#011414] flex flex-col items-center justify-center p-6 select-none overflow-hidden"
     >
-      {/* Deep Teal Volumetric Atmosphere */}
-      <div className="absolute w-[750px] h-[750px] rounded-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.22)_0%,rgba(13,78,77,0.15)_45%,transparent_75%)] blur-3xl pointer-events-none" />
+      {/* Deep Teal Atmospheric Core Glow */}
+      <div className="absolute w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.22)_0%,rgba(13,78,77,0.15)_45%,transparent_75%)] blur-3xl pointer-events-none" />
 
-      {/* Main Neural Genesis Stage */}
-      <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center pointer-events-none">
+      {/* Centerpiece: Sharp 45°/90° Circuit PCB Tensor Graph converging to geometric 'K' */}
+      <div className="relative w-72 h-72 sm:w-84 sm:h-84 flex items-center justify-center pointer-events-none">
         
-        {/* Flash Burst Stage */}
-        {phase === 'flash' && (
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: [1, 2.5], opacity: [0.8, 0] }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-white via-teal-200 to-transparent blur-2xl"
-          />
-        )}
-
-        {/* Synaptic Dendritic Web Lines (Visible during branching & flash) */}
-        {(phase === 'branching' || phase === 'flash' || phase === 'dissolving') && (
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 200">
-            {/* Primary Neural Axons branching outward */}
-            {[
-              "M 100 100 Q 120 70 145 50 T 170 30",
-              "M 100 100 Q 80 65 55 45 T 30 35",
-              "M 100 100 Q 135 110 165 130 T 185 160",
-              "M 100 100 Q 65 125 45 155 T 25 175",
-              "M 100 100 Q 105 50 110 25 T 115 10",
-              "M 100 100 Q 95 150 90 175 T 85 195",
-              "M 100 100 Q 140 85 175 80 T 195 75",
-              "M 100 100 Q 60 90 25 95 T 10 100"
-            ].map((d, idx) => (
-              <motion.path
-                key={idx}
-                d={d}
-                fill="none"
-                stroke="#14b8a6"
-                strokeWidth="1.2"
-                strokeOpacity="0.75"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.1, delay: idx * 0.04, ease: 'easeOut' }}
-              />
-            ))}
-
-            {/* Interconnecting secondary synapses */}
-            {[
-              "M 145 50 Q 155 90 175 80",
-              "M 55 45 Q 40 70 25 95",
-              "M 165 130 Q 130 150 90 175",
-              "M 45 155 Q 70 165 90 175",
-              "M 110 25 Q 75 35 55 45",
-              "M 110 25 Q 130 35 145 50"
-            ].map((d, idx) => (
-              <motion.path
-                key={`sec-${idx}`}
-                d={d}
-                fill="none"
-                stroke="#5eead4"
-                strokeWidth="0.8"
-                strokeOpacity="0.5"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.9, delay: 0.3 + idx * 0.05, ease: 'easeOut' }}
-              />
-            ))}
-
-            {/* Porcelain Synaptic Nodes lighting up at intersections */}
-            {[
-              [145, 50], [55, 45], [165, 130], [45, 155],
-              [110, 25], [90, 175], [175, 80], [25, 95],
-              [170, 30], [30, 35], [185, 160], [25, 175]
-            ].map(([cx, cy], idx) => (
-              <motion.circle
-                key={`node-${idx}`}
-                cx={cx}
-                cy={cy}
-                r="3"
-                fill="#ffffff"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: [0, 1.4, 1], opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 + idx * 0.04 }}
-              />
-            ))}
-          </svg>
-        )}
-
-        {/* Central Porcelain White Dot & Expanding Core Pulse */}
-        <div className="relative flex items-center justify-center">
-          {/* Outer porcelain shockwave ring */}
-          <motion.div
-            animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0.1, 0.6] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-            className="absolute w-12 h-12 rounded-full border border-teal-300/40 pointer-events-none"
+        {/* Subtle Outer Octagonal PCB Boundary (Strict 45° Chamfered Corners) */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 240 240">
+          {/* Outer Octagon Frame */}
+          <motion.polygon
+            points="60,20 180,20 220,60 220,180 180,220 60,220 20,180 20,60"
+            fill="none"
+            stroke="#14b8a6"
+            strokeWidth="1.2"
+            strokeOpacity={stage === 'holding' ? 0.7 : 0.35}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           />
 
-          {/* Central Glowing Porcelain White Dot */}
-          <motion.div
-            animate={{
-              scale: phase === 'flash' ? [1, 3, 1] : [1, 1.25, 1],
-              boxShadow: phase === 'flash'
-                ? '0 0 60px 20px rgba(255, 255, 255, 0.9)'
-                : '0 0 30px 8px rgba(255, 255, 255, 0.7)'
-            }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-4 h-4 rounded-full bg-white z-10"
+          {/* Precision 45° and 90° Circuit Feed Traces converging inward */}
+          {[
+            // Top feeds (90° then 45°)
+            "M 120 20 L 120 45 L 95 70",
+            "M 60 20 L 60 40 L 80 60",
+            "M 180 20 L 180 40 L 160 60",
+            // Bottom feeds
+            "M 120 220 L 120 195 L 95 170",
+            "M 60 220 L 60 200 L 80 180",
+            "M 180 220 L 180 200 L 160 180",
+            // Lateral 90° and 45° bus lines
+            "M 20 120 L 45 120 L 70 95",
+            "M 220 120 L 195 120 L 170 145",
+            "M 20 60 L 50 60 L 70 80",
+            "M 220 180 L 190 180 L 170 160"
+          ].map((d, idx) => (
+            <motion.path
+              key={idx}
+              d={d}
+              fill="none"
+              stroke="#2dd4bf"
+              strokeWidth="1.2"
+              strokeOpacity={0.6}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.7, delay: idx * 0.02, ease: 'easeOut' }}
+            />
+          ))}
+
+          {/* Central Converged Stylized Geometric 'K' (Sharp 90° and 45° Tensor Graph) */}
+          {/* Vertical Stem of 'K' */}
+          <motion.line
+            x1="88"
+            y1="64"
+            x2="88"
+            y2="176"
+            stroke="#ffffff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
           />
-        </div>
+
+          {/* Upper Diagonal Arm (45° Angle): starts from stem, branches up-right at 45° */}
+          <motion.path
+            d="M 88 120 L 115 120 L 152 74"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.6, delay: 0.35, ease: 'easeOut' }}
+          />
+
+          {/* Lower Diagonal Arm (45° Angle): branches down-right at 45° */}
+          <motion.path
+            d="M 110 126 L 152 168"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
+          />
+
+          {/* Upper Terminal Accent */}
+          <motion.line
+            x1="152"
+            y1="74"
+            x2="164"
+            y2="74"
+            stroke="#ffffff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.4, delay: 0.55 }}
+          />
+
+          {/* Lower Terminal Accent */}
+          <motion.line
+            x1="152"
+            y1="168"
+            x2="164"
+            y2="168"
+            stroke="#ffffff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.4, delay: 0.65 }}
+          />
+
+          {/* Precision Porcelain White Solder Nodes at Geometric Vertices */}
+          {[
+            // K vertex terminals
+            [88, 64], [88, 120], [88, 176],
+            [164, 74], [164, 168], [115, 120],
+            // Outer Octagon boundary nodes
+            [60, 20], [180, 20], [220, 60], [220, 180],
+            [180, 220], [60, 220], [20, 180], [20, 60],
+            // Inward bus nodes
+            [95, 70], [95, 170], [160, 60], [160, 180]
+          ].map(([cx, cy], idx) => (
+            <motion.circle
+              key={idx}
+              cx={cx}
+              cy={cy}
+              r={idx < 6 ? "3.5" : "2.5"}
+              fill="#ffffff"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{
+                scale: stage === 'holding' ? (idx < 6 ? 1.3 : 1) : 1,
+                opacity: 1
+              }}
+              transition={{ duration: 0.4, delay: 0.3 + idx * 0.02 }}
+            />
+          ))}
+        </svg>
+
+        {/* Ambient Pulsing Glow around converged 'K' */}
+        <motion.div
+          animate={{
+            scale: stage === 'holding' ? [1, 1.05, 1] : 1,
+            opacity: stage === 'holding' ? [0.7, 0.95, 0.7] : 0.4
+          }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute w-28 h-28 rounded-2xl bg-teal-300/10 blur-xl pointer-events-none"
+        />
       </div>
 
-      {/* Haute-Couture Porcelain Typography */}
+      {/* Haute-Couture Porcelain Status Typography */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
         className="mt-8 text-center pointer-events-none"
       >
-        <div className="font-serif text-sm tracking-[0.3em] text-white uppercase font-medium mb-1.5 drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">
-          KHAGESH // SYNAPTIC GENESIS
+        <div className="font-serif text-sm tracking-[0.35em] text-white uppercase font-medium mb-1.5 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]">
+          KHAGESH // NEURAL TENSOR GRAPH
         </div>
         <div className="text-[10px] font-mono tracking-[0.25em] text-teal-300 uppercase">
-          INITIALIZING NEURAL TOPOLOGY // {progress}%
+          {stage === 'holding' ? 'TOPOLOGY LOCKED // SYNAPSE ACTIVE' : `SYNTHESIZING ARCHITECTURE // ${progress}%`}
         </div>
       </motion.div>
     </motion.div>

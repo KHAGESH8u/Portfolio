@@ -21,8 +21,8 @@ if (typeof window !== 'undefined') {
   );
 }
 
-// 1. Abstract Fluid Topographic Cyber Wave
-const AbstractFluidTerrain = () => {
+// 1. Fluid Computational Tensor Lattice / Wireframe Terrain
+const TensorLatticeTerrain = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const geomRef = useRef<THREE.PlaneGeometry>(null);
 
@@ -40,7 +40,6 @@ const AbstractFluidTerrain = () => {
   }, [segments]);
 
   useFrame((state) => {
-    // Smooth mouse lerping
     mouseState.x = THREE.MathUtils.lerp(mouseState.x, mouseState.targetX, 0.08);
     mouseState.y = THREE.MathUtils.lerp(mouseState.y, mouseState.targetY, 0.08);
 
@@ -66,11 +65,9 @@ const AbstractFluidTerrain = () => {
         const dy = y - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // Fluid undulating abstract wave
         let wave = Math.sin(t * 1.6 + (x * 0.28 + y * 0.28)) * 0.55;
         wave += Math.cos(t * 1.2 + x * 0.35) * 0.3;
 
-        // Dynamic cursor repulsion
         if (dist < 7.5) {
           wave += (7.5 - dist) * 0.32;
         }
@@ -100,74 +97,80 @@ const AbstractFluidTerrain = () => {
   );
 };
 
-// 2. Abstract Floating Neon Violet Polyhedral Monoliths
-const AbstractFloatingGeometry = () => {
+// 2. Pure AI Neural Network & Synaptic Data Mesh (No Primitive Geometric Meshes)
+const NeuralDataMesh = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const count = 16;
+  const nodeCount = 80;
+  const maxDistance = 4.8;
 
-  const items = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => ({
-      position: [
-        (Math.random() - 0.5) * 22,
-        (Math.random() - 0.5) * 14 + 1,
-        (Math.random() - 0.5) * 10 - 2
-      ] as [number, number, number],
-      scale: 0.35 + Math.random() * 0.45,
-      rotSpeed: [
-        (Math.random() - 0.5) * 0.6,
-        (Math.random() - 0.5) * 0.8,
-        (Math.random() - 0.5) * 0.5
-      ],
-      isOcta: i % 2 === 0
-    }));
-  }, [count]);
+  const [nodes, linesGeometry] = useMemo(() => {
+    const pts: THREE.Vector3[] = [];
+    for (let i = 0; i < nodeCount; i++) {
+      pts.push(
+        new THREE.Vector3(
+          (Math.random() - 0.5) * 24,
+          (Math.random() - 0.5) * 16,
+          (Math.random() - 0.5) * 12
+        )
+      );
+    }
 
-  useFrame((state, delta) => {
+    const linePositions: number[] = [];
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const d = pts[i].distanceTo(pts[j]);
+        if (d < maxDistance) {
+          linePositions.push(pts[i].x, pts[i].y, pts[i].z);
+          linePositions.push(pts[j].x, pts[j].y, pts[j].z);
+        }
+      }
+    }
+
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(linePositions, 3)
+    );
+
+    return [pts, geom];
+  }, [nodeCount]);
+
+  useFrame((state) => {
     if (groupRef.current) {
-      // Fluid orbital drift reacting to cursor
       groupRef.current.rotation.y = THREE.MathUtils.lerp(
         groupRef.current.rotation.y,
-        mouseState.x * 0.25,
+        mouseState.x * 0.22,
         0.05
       );
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
-        -mouseState.y * 0.18,
+        -mouseState.y * 0.16,
         0.05
       );
-
-      // Rotate individual children
-      groupRef.current.children.forEach((child, idx) => {
-        const item = items[idx];
-        if (item) {
-          child.rotation.x += delta * item.rotSpeed[0];
-          child.rotation.y += delta * item.rotSpeed[1];
-          child.rotation.z += delta * item.rotSpeed[2];
-          // Gentle floating bob
-          child.position.y += Math.sin(state.clock.elapsedTime * 1.5 + idx) * 0.003;
-        }
-      });
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.15;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {items.map((item, idx) => (
-        <mesh key={idx} position={item.position} scale={item.scale}>
-          {item.isOcta ? (
-            <octahedronGeometry args={[1, 0]} />
-          ) : (
-            <dodecahedronGeometry args={[1, 0]} />
-          )}
-          <meshStandardMaterial
-            color="#c084fc"
-            emissive="#7e22ce"
-            emissiveIntensity={0.65}
-            metalness={0.9}
-            roughness={0.15}
-            wireframe={idx % 3 === 0}
+      {/* Synaptic Interconnect Lines */}
+      <lineSegments geometry={linesGeometry}>
+        <lineBasicMaterial
+          color="#a855f7"
+          transparent
+          opacity={0.4}
+          blending={THREE.AdditiveBlending}
+        />
+      </lineSegments>
+
+      {/* Neural Data Nodes */}
+      {nodes.map((pos, idx) => (
+        <mesh key={idx} position={pos}>
+          <sphereGeometry args={[idx % 4 === 0 ? 0.09 : 0.065, 8, 8]} />
+          <meshBasicMaterial
+            color={idx % 2 === 0 ? '#d946ef' : '#c084fc'}
             transparent
-            opacity={0.7}
+            opacity={0.9}
           />
         </mesh>
       ))}
@@ -176,7 +179,7 @@ const AbstractFloatingGeometry = () => {
 };
 
 // 3. Cyber Stardust Field with Vertical Parallax
-const AbstractStardust = () => {
+const CyberStardust = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const scrollYRef = useRef(0);
   const count = 550;
@@ -221,7 +224,6 @@ const AbstractStardust = () => {
       pointsRef.current.rotation.y -= delta * 0.015;
       pointsRef.current.rotation.x += delta * 0.008;
 
-      // Vertical parallax
       const targetY = scrollYRef.current * 0.001;
       pointsRef.current.position.y = THREE.MathUtils.lerp(
         pointsRef.current.position.y,
@@ -229,7 +231,6 @@ const AbstractStardust = () => {
         0.05
       );
 
-      // Mouse lean
       pointsRef.current.rotation.z = mouseState.x * 0.05;
     }
   });
@@ -277,14 +278,14 @@ export const GlobalCyberCanvas: React.FC = () => {
           <pointLight position={[-6, -4, 4]} intensity={2.8} color="#d946ef" />
           <pointLight position={[0, 3, 7]} intensity={2.4} color="#a855f7" />
 
-          {/* Abstract Fluid Topographic Mesh */}
-          <AbstractFluidTerrain />
+          {/* Computational Tensor Lattice */}
+          <TensorLatticeTerrain />
 
-          {/* Abstract Floating Neon Violet Polyhedra */}
-          <AbstractFloatingGeometry />
+          {/* AI Neural Data Mesh & Synapses (No Primitive Meshes) */}
+          <NeuralDataMesh />
 
           {/* Radiant Stardust Field */}
-          <AbstractStardust />
+          <CyberStardust />
         </Suspense>
       </Canvas>
 
